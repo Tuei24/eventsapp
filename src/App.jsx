@@ -6,6 +6,7 @@ import Home from './components/Home'
 import Login from './components/Login'
 import Register from './components/Register'
 import Posts from './components/Posts'
+import Dashboard from './components/Dashboard'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Posts" element={<Posts />} />
+          <Route path="/Admin/Dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
 

@@ -12,6 +12,7 @@ export default function Home() {
         </div>
         <nav className="nav">
           <ul>
+            <li><Link to="/Admin/Dashboard">Dashboard</Link></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Events</a></li>
             <li><a href="#">Contact</a></li>
