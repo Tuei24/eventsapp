@@ -12,43 +12,56 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 const drawerWidth = 240;
 
 const DashboardCard = ({ title, value, percentage, icon, iconBg }) => (
-  <Card sx={{
-    height: '100%',
-    width: '100%',
-    display: 'flex',
-    p: 2,
-    borderRadius: 5,
-  }}>
-    <CardContent sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
-      <Stack direction="row" alignItems="center" spacing={5} sx={{ width: '100%' }} >
-        <Box sx={{
-          backgroundImage: iconBg,
-          backgroundSize: 'cover',
-          color: '#fff',
-          width: 70,
-          height: 70,
-          borderRadius: 5,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexShrink: 0,
-        }}>{icon}
+  <Card
+    sx={{
+      height: '100%',
+      width: '100%',
+      borderRadius: 4,
+      boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.05)',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      px: 3,
+      py: 2,
+    }}
+  >
+    <CardContent sx={{ p: 0 }}>
+      <Stack direction="row" spacing={2} alignItems="center">
+        <Box
+          sx={{
+            background: iconBg,
+            width: 60,
+            height: 60,
+            borderRadius: 4,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#fff',
+            fontSize: 24,
+            flexShrink: 0,
+
+          }}
+        >
+          {icon}
         </Box>
 
         <Box>
-          <Typography variant="h5" fontWeight="bold">
+          <Typography variant="h4" fontWeight="700" sx={{ lineHeight: 1.2 }}>
             {value}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {title}
           </Typography>
           <Box sx={{
+            mt: 0.5,
             backgroundColor: '#dcfce7',
             color: '#16a34a',
-            borderRadius: 3,
-            px: 1.2,
-            py: 0.3,
-            mt: 1.5,
+            borderRadius: 2,
+            px: 1,
+            py: 0.25,
+            fontSize: 11,
+            display: 'inline-block',
+            fontWeight: 600,
           }}>{percentage}</Box>
 
 
@@ -101,30 +114,32 @@ const Dashboard = () => {
       <Box
         component="main"
         sx={{
-          flexGrow: 1,
-          mt: 8,
-          px: 4,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          py: 3,
+          flexGrow: 2,
+          // width: { sm: `calc(100% - ${drawerWidth}px)` },
+
         }}
       >
-        <Container maxWidth="xl">
+        <Container >
           <Grid container spacing={3}>
             {cardData.map((card, index) => (
-              <Grid item xs={12} sm={6} md={3} key={index}>
-                <DashboardCard
-                  value={card.value}
-                  title={card.title}
-                  percentage={card.percentage}
-                  icon={card.icon}
-                  iconBg={card.iconBg}
-                />
+              <Grid item xs={12} sm={6} md={3} key={index} sx={{
+                display: 'flex'
+              }} >
+                <Box sx={{ width: '100%' }}>
+                  <DashboardCard
+                    value={card.value}
+                    title={card.title}
+                    percentage={card.percentage}
+                    icon={card.icon}
+                    iconBg={card.iconBg}
+                  />
+                </Box>
               </Grid>
             ))}
           </Grid>
         </Container>
       </Box>
-    </Box>
+    </Box >
   );
 };
 
