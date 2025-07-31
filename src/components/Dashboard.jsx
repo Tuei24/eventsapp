@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { useState } from 'react'
-import { Box, CssBaseline, Grid, Card, CardContent, Typography, Container, Stack } from '@mui/material'
+import { Box, CssBaseline, Grid, Card, CardContent, Typography, Stack } from '@mui/material'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Groups2Icon from '@mui/icons-material/Groups2';
@@ -9,7 +9,7 @@ import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const DashboardCard = ({ title, value, percentage, icon, iconBg }) => (
   <Card
@@ -114,30 +114,27 @@ const Dashboard = () => {
       <Box
         component="main"
         sx={{
-          flexGrow: 2,
-          // width: { sm: `calc(100% - ${drawerWidth}px)` },
-
+          flexGrow: 1,
+          width: '100%',
+          ml: 0, // Set margin-left to 0px
+          mt: '64px', // Add top margin to account for the fixed Topbar (standard AppBar height)
+          p: 3, // Add padding for better spacing
+          minHeight: 'calc(100vh - 64px)', // Ensure full height minus Topbar
         }}
       >
-        <Container >
-          <Grid container spacing={3}>
-            {cardData.map((card, index) => (
-              <Grid item xs={12} sm={6} md={3} key={index} sx={{
-                display: 'flex'
-              }} >
-                <Box sx={{ width: '100%' }}>
-                  <DashboardCard
-                    value={card.value}
-                    title={card.title}
-                    percentage={card.percentage}
-                    icon={card.icon}
-                    iconBg={card.iconBg}
-                  />
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
+        <Grid container spacing={3} sx={{ height: '10vh' }}>
+          {cardData.map((card, index) => (
+            <Grid item xs={12} sm={6} md={3} key={index}>
+              <DashboardCard
+                value={card.value}
+                title={card.title}
+                percentage={card.percentage}
+                icon={card.icon}
+                iconBg={card.iconBg}
+              />
+            </Grid>
+          ))}
+        </Grid>
       </Box>
     </Box >
   );
