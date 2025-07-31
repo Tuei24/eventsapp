@@ -1,4 +1,4 @@
-/* 
+
 .header{
   display:flex;
   background-color: #292b2a !important; 
@@ -83,9 +83,9 @@ button a {
 }
 
 body {
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   
 }
 
@@ -169,4 +169,4 @@ form button:hover {
 
 
 
- */
+
