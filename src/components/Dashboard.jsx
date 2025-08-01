@@ -2,7 +2,6 @@
 import React from 'react'
 import { useState } from 'react'
 import { Box, CssBaseline, Grid, Card, CardContent, Typography, Stack, Button } from '@mui/material'
-import { Box, CssBaseline, Grid, Card, CardContent, Typography, Stack } from '@mui/material'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Groups2Icon from '@mui/icons-material/Groups2';
@@ -147,7 +146,7 @@ const Dashboard = () => {
         sx={{
           flexGrow: 1,
           width: '100%',
-          ml: 0,
+          ml: 30,
           mt: '64px',
           p: 3,
           minHeight: 'calc(100vh - 64px)',
