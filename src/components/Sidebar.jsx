@@ -1,4 +1,4 @@
-// Sidebar.jsx
+
 import React from 'react';
 import { Drawer, Toolbar, Box, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -27,6 +27,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, drawerWidth }) => {
     <Drawer
       sx={{
         width: drawerWidth,
+        position: 'fixed',
         flexShrink: 0,
         '& .MuiDrawer-paper': {
           width: drawerWidth,
@@ -37,12 +38,14 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, drawerWidth }) => {
       anchor="left"
     >
 
+
       <Box sx={{
         overflow: 'auto',
         height: '100%',
         backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         color: 'white',
-      }}>
+      }}
+      >
         <Box
           sx={{
             display: 'flex',
@@ -51,8 +54,8 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, drawerWidth }) => {
             py: 2,
             borderBottom: '1px solid rgba(255,255,255,0.2)',
             padding: '2rem 1.5rem',
-          }}
-        >
+          }}>
+
           <CalendarMonthIcon sx={{ mr: 1, color: 'white' }} />
           <Typography variant="h5" fontWeight="bold" >
             EventHub

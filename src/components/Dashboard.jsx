@@ -8,7 +8,9 @@ import Groups2Icon from '@mui/icons-material/Groups2';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import MailIcon from '@mui/icons-material/Mail'
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+
+
 
 const drawerWidth = 250;
 
@@ -108,6 +110,30 @@ const Dashboard = () => {
     },
   ];
 
+  const upcomingEvents = [
+    {
+      date: { day: '25', month: 'JUL' },
+      title: 'Tech Conference 2024',
+      location: 'San Francisco, CA',
+      time: '9:00 AM – 6:00 PM',
+
+    },
+    {
+      date: { day: '28', month: 'JUL' },
+      title: 'Marketing Workshop',
+      location: 'New York, NY',
+      time: '2:00 PM – 5:00 PM',
+
+    },
+    {
+      date: { day: '02', month: 'AUG' },
+      title: 'Design Meetup',
+      location: 'Los Angeles, CA',
+      time: '7:00 PM – 10:00 PM',
+
+    },
+  ];
+
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -126,7 +152,7 @@ const Dashboard = () => {
           minHeight: 'calc(100vh - 64px)',
         }}
       >
-        <Grid container spacing={3} sx={{ height: '10vh' }}>
+        <Grid container spacing={3} sx={{ height: '10vh' }} >
           {cardData.map((card, index) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
               <DashboardCard
@@ -141,9 +167,67 @@ const Dashboard = () => {
         </Grid>
 
 
-      </Box>
-    </Box >
 
+        <Grid container spacing={3} sx={{ mt: 20, pr: 60 }}>
+          <Grid item xs={12} md={8}>
+            <Card sx={{
+              pl: 3,
+              pr: 20,
+            }}>
+
+              <CardContent>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1,
+                    padding: '1rem 1.5rem',
+
+                  }}>
+                  <CalendarMonthIcon /><Typography variant="h6" fontWeight={600}  >
+                    Upcoming Events
+                  </Typography>
+                </Box>
+                <Stack spacing={5}>
+                  {upcomingEvents.map((event, index) => (
+                    <Box key={index} display="flex" justifyContent="space-between" >
+                      <Box display="flex" alignItems="center">
+                        <Box
+                          sx={{
+                            background: 'linear-gradient(135deg, #667eea, #764ba2 100%)',
+                            color: 'white',
+                            borderRadius: 2,
+                            px: 2,
+                            py: 1,
+                            textAlign: 'center',
+                            mr: 2,
+
+                          }}
+                        >
+                          <Typography variant="h5" fontWeight="600">{event.date.day}</Typography>
+                          <Typography variant="caption">{event.date.month}</Typography>
+                        </Box>
+                        <Box>
+                          <Typography fontWeight={600}>{event.title}</Typography>
+                          <Typography variant="body2" color="text.secondary" sx={{ py: 1 }}>
+                            {event.location}
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            {event.time}
+                          </Typography>
+                        </Box>
+                      </Box>
+
+                    </Box>
+                  ))}
+                </Stack>
+              </CardContent>
+            </Card>
+          </Grid>
+
+        </Grid>
+      </Box>
+    </Box>
   );
 };
 
