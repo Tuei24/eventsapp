@@ -9,6 +9,7 @@ import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import '../App.css'
 
 
 
@@ -136,7 +137,7 @@ const Dashboard = () => {
 
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
       <CssBaseline />
       <Topbar selectedMenu={selectedMenu} drawerWidth={drawerWidth} />
       <Sidebar selectedMenu={selectedMenu} setSelectedMenu={setSelectedMenu} drawerWidth={drawerWidth} />
@@ -154,7 +155,9 @@ const Dashboard = () => {
       >
         <Grid container spacing={3} sx={{ height: '10vh' }} >
           {cardData.map((card, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
+            <Grid item xs={12} sm={6} md={3} key={index} sx={{
+              minWidth: { xs: '100%', sm: 'auto' },
+            }}  >
               <DashboardCard
                 value={card.value}
                 title={card.title}
@@ -168,12 +171,15 @@ const Dashboard = () => {
 
 
 
-        <Grid container spacing={3} sx={{ mt: 20, pr: 60 }}>
+        <Grid container spacing={3} sx={{ mt: 20, pr: 60 }} className="upcoming-events">
           <Grid item xs={12} md={8}>
             <Card sx={{
+              borderRadius: 4,
+              boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.25)',
               pl: 3,
               pr: 20,
-            }}>
+              width: '100%',
+            }} className="upcoming-events-card">
 
               <CardContent>
                 <Box
@@ -190,33 +196,41 @@ const Dashboard = () => {
                 </Box>
                 <Stack spacing={5}>
                   {upcomingEvents.map((event, index) => (
-                    <Box key={index} display="flex" justifyContent="space-between" >
-                      <Box display="flex" alignItems="center">
-                        <Box
-                          sx={{
-                            background: 'linear-gradient(135deg, #667eea, #764ba2 100%)',
-                            color: 'white',
-                            borderRadius: 2,
-                            px: 2,
-                            py: 1,
-                            textAlign: 'center',
-                            mr: 2,
+                    <Box
+                      key={index}
+                      display="flex"
+                      alignItems="flex-start"
+                      sx={{
+                        flexDirection: { xs: 'column', sm: 'row' },
+                        gap: { xs: 2, sm: 0 },
+                      }}
+                    >
 
-                          }}
-                        >
-                          <Typography variant="h5" fontWeight="600">{event.date.day}</Typography>
-                          <Typography variant="caption">{event.date.month}</Typography>
-                        </Box>
-                        <Box>
-                          <Typography fontWeight={600}>{event.title}</Typography>
-                          <Typography variant="body2" color="text.secondary" sx={{ py: 1 }}>
-                            {event.location}
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {event.time}
-                          </Typography>
-                        </Box>
+                      <Box
+                        sx={{
+                          background: 'linear-gradient(135deg, #667eea, #764ba2 100%)',
+                          color: 'white',
+                          borderRadius: 2,
+                          px: 2,
+                          py: 1,
+                          textAlign: 'center',
+                          mr: 2,
+
+                        }}
+                      >
+                        <Typography variant="h5" fontWeight="600">{event.date.day}</Typography>
+                        <Typography variant="caption">{event.date.month}</Typography>
                       </Box>
+                      <Box sx={{ flex: 1 }}>
+                        <Typography fontWeight={600}>{event.title}</Typography>
+                        <Typography variant="body2" color="text.secondary" sx={{ py: 1 }}>
+                          {event.location}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {event.time}
+                        </Typography>
+                      </Box>
+
 
                     </Box>
                   ))}
