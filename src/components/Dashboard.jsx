@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { Box, CssBaseline, Grid, Card, CardContent, Typography, Stack, Button } from '@mui/material'
+import { Box, CssBaseline, Grid, Card, CardContent, Typography, Stack, Button, IconButton } from '@mui/material'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Groups2Icon from '@mui/icons-material/Groups2';
@@ -16,13 +16,25 @@ import FileDownloadRoundedIcon from '@mui/icons-material/FileDownloadRounded';
 import StyleIcon from '@mui/icons-material/Style';
 import RestoreIcon from '@mui/icons-material/Restore';
 import EditNoteIcon from '@mui/icons-material/EditNote';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import dayjs from 'dayjs';
+import ArrowLeft from '@mui/icons-material/ArrowLeft';
+import ArrowRight from '@mui/icons-material/ArrowRight';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
 
 import '../App.css'
 
-
-
 const drawerWidth = 250;
 const Bold = ({ children }) => <span style={{ fontWeight: 600 }}>{children}</span>
+const slots = {
+  leftArrowIcon: ArrowLeft,
+  rightArrowIcon: ArrowRight,
+};
 
 const DashboardCard = ({ title, value, percentage, icon, iconBg }) => (
 
@@ -323,6 +335,7 @@ const Dashboard = () => {
                             borderStyle: 'solid',
                             borderColor: 'rgb(226, 232, 240)',
                             borderRadius: '15px',
+                            // width: '700px'
 
 
                           }}>
@@ -480,6 +493,89 @@ const Dashboard = () => {
                 </CardContent>
               </Card>
             </Grid>
+
+            <Grid item xs={12} md={3}>
+              <Card sx={{
+                borderRadius: 4,
+                boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+                height: '100%',
+              }}>
+                <CardContent>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DateCalendar
+                      sx={{
+                        width: '100%',
+
+                        '& .MuiPickersCalendarHeader-root': {
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          padding: '1.5rem',
+                          marginBottom: '0.5rem',
+                          borderBottom: '1px solid rgb(241, 245, 249)',
+                        },
+                        '& .MuiPickersCalendarHeader-label': {
+                          fontWeight: 600,
+                          fontSize: '1.125rem',
+                          color: 'rgb(30, 41, 59)',
+                        },
+                        '& .MuiPickersArrowSwitcher-root': {
+                          display: 'flex',
+                          gap: '0.5rem',
+                        },
+                        '& .MuiIconButton-root': {
+                          color: 'rgb(100, 116, 139)',
+                          padding: '0.25rem',
+                          '&:hover': {
+                            backgroundColor: 'rgba(241, 245, 249, 1)',
+                          },
+                        },
+                        '& .MuiPickersDay-root': {
+                          fontWeight: 400,
+                          width: '40px',
+                          height: '40px',
+                          margin: '0 2px',
+                          fontSize: '0.9rem',
+                        },
+                        '& .MuiDayCalendar-weekDayLabel': {
+                          fontWeight: 600,
+                          color: 'rgb(100, 116, 139)',
+                          width: '40px',
+                          height: '40px',
+                          margin: '0 2px',
+                          fontSize: '0.875rem',
+                        },
+                        '& .MuiPickersDay-today': {
+                          border: '1px solid',
+                          borderColor: 'primary.main',
+                          backgroundColor: 'transparent',
+                        },
+                        '& .MuiDayCalendar-header': {
+                          justifyContent: 'space-around',
+                          marginBottom: '0.5rem',
+                        },
+                      }}
+                      slotProps={{
+                        day: {
+                          sx: {
+                            '&.Mui-selected': {
+                              backgroundColor: 'primary.main',
+                              color: 'white',
+                              '&:hover': {
+                                backgroundColor: 'primary.dark',
+                              },
+                            },
+                          },
+                        },
+                      }}
+                      showDaysOutsideCurrentMonth
+                      fixedWeekNumber={6}
+                    />
+                  </LocalizationProvider>
+                </CardContent>
+              </Card>
+            </Grid>
+
 
 
 
