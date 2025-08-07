@@ -394,7 +394,7 @@ const Dashboard = () => {
           }}
         >
           {/* First Section - 3/12 */}
-          <Box sx={{ flex: { xs: '100%', md: 3 }, minWidth: 0 }}>
+          <Box sx={{ flex: { xs: '100%', md: 4 }, minWidth: 0 }}>
             <Card
               sx={{
                 borderRadius: 4,
@@ -458,7 +458,7 @@ const Dashboard = () => {
           </Box>
 
           {/* Second Section - 6/12 */}
-          <Box sx={{ flex: { xs: '100%', md: 6 }, minWidth: 0 }}>
+          <Box sx={{ flex: { xs: '100%', md: 4 }, minWidth: 0 }}>
             <Card
               sx={{
                 borderRadius: 4,
@@ -583,7 +583,7 @@ const Dashboard = () => {
           </Box>
 
           {/* Third Section - 3/12 */}
-          <Box sx={{ flex: { xs: '100%', md: 3 }, minWidth: 0 }}>
+          <Box sx={{ flex: { xs: '100%', md: 4 }, minWidth: 0 }}>
             <Card
               sx={{
                 borderRadius: 4,
