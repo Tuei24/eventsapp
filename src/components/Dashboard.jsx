@@ -16,25 +16,13 @@ import FileDownloadRoundedIcon from '@mui/icons-material/FileDownloadRounded';
 import StyleIcon from '@mui/icons-material/Style';
 import RestoreIcon from '@mui/icons-material/Restore';
 import EditNoteIcon from '@mui/icons-material/EditNote';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import dayjs from 'dayjs';
-import ArrowLeft from '@mui/icons-material/ArrowLeft';
-import ArrowRight from '@mui/icons-material/ArrowRight';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
 
 import '../App.css'
 
 const drawerWidth = 250;
-const Bold = ({ children }) => <span style={{ fontWeight: 600 }}>{children}</span>
-const slots = {
-  leftArrowIcon: ArrowLeft,
-  rightArrowIcon: ArrowRight,
-};
 
 const DashboardCard = ({ title, value, percentage, icon, iconBg }) => (
 
@@ -191,9 +179,18 @@ const Dashboard = () => {
           minHeight: 'calc(100vh - 64px)',
         }}
       >
-        <Grid container spacing={3} sx={{ mb: 4 }} >
+        <Grid
+          container
+          spacing={3}
+          sx={{
+            mb: 4,
+            width: '100%',
+            mx: 0,
+            px: 0,
+          }}
+        >
           {cardData.map((card, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index} >
+            <Grid item xs={12} sm={6} md={3} key={index}>
               <DashboardCard
                 value={card.value}
                 title={card.title}
@@ -203,270 +200,344 @@ const Dashboard = () => {
               />
             </Grid>
           ))}
+        </Grid>
 
 
-          <Grid container spacing={3} >
-            <Grid item xs={12} md={8}>
 
-              <Card sx={{
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            width: '100%',
+            gap: 3,
+            mb: 4,
+          }}
+        >
+          {/* Left section (8/12 columns) */}
+          <Box
+            sx={{
+              flex: { xs: '100%', md: 8 },
+              minWidth: { xs: '100%', md: '0' },
+            }}
+          >
+            <Card
+              sx={{
                 borderRadius: 4,
                 boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.25)',
-                pl: 3,
-                pr: 20,
-                height: '100%'
-              }}  >
-
-                <CardContent>
-                  <Box
+                px: 3,
+                height: '100%',
+              }}
+            >
+              <CardContent>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '1rem 1.5rem',
+                    mb: 3,
+                    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+                  }}
+                >
+                  <CalendarMonthIcon />
+                  <Typography variant="h6" fontWeight={600}>
+                    Upcoming Events
+                  </Typography>
+                  <Button
                     sx={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      padding: '1rem 1.5rem',
-                      mb: 3,
-                      borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
-
-                    }}>
-
-                    <CalendarMonthIcon /><Typography variant="h6" fontWeight={600}  >
-                      Upcoming Events
-                    </Typography>
-                    <Button sx={{
                       textTransform: 'none',
                       color: 'rgb(100, 116, 139)',
                       fontWeight: 500,
-                      cursor: 'pointer',
                       padding: '0.5rem 1rem',
                       background: 'rgb(241, 245, 249)',
-                      borderWidth: 'initial',
-                      borderStyle: 'none',
-                      borderColor: 'initial',
-                      borderImage: 'initial',
                       borderRadius: '15px',
+                    }}
+                  >
+                    View All
+                  </Button>
+                </Box>
 
-                    }}>View All </Button>
-                  </Box>
-
-                  <Stack spacing={5}>
-                    {upcomingEvents.map((event, index) => (
+                <Stack spacing={5}>
+                  {upcomingEvents.map((event, index) => (
+                    <Box
+                      key={index}
+                      display="flex"
+                      alignItems="center"
+                      sx={{
+                        flexDirection: { xs: 'column', sm: 'row' },
+                        gap: { xs: 2, sm: 0 },
+                      }}
+                    >
                       <Box
-                        key={index}
-                        display="flex"
-                        alignItems="center"
                         sx={{
-                          flexDirection: { xs: 'column', sm: 'row' },
-                          gap: { xs: 2, sm: 0 },
-                          span: 8,
-
+                          background: 'linear-gradient(135deg, #667eea, #764ba2 100%)',
+                          color: 'white',
+                          borderRadius: 2,
+                          px: 2,
+                          py: 1,
+                          textAlign: 'center',
+                          mr: 2,
                         }}
                       >
-                        <Box
-                          sx={{
-                            background: 'linear-gradient(135deg, #667eea, #764ba2 100%)',
-                            color: 'white',
-                            borderRadius: 2,
-                            px: 2,
-                            py: 1,
-                            textAlign: 'center',
-                            mr: 2,
-
-                          }}
-                        >
-                          <Typography variant="h5" fontWeight="600">{event.date.day}</Typography>
-                          <Typography variant="caption">{event.date.month}</Typography>
-                        </Box>
-                        <Box sx={{ flex: 1 }}>
-                          <Typography fontWeight={600}>{event.title}</Typography>
-                          <Typography variant="body2" color="text.secondary" sx={{ py: 1 }}>
-                            {event.location}
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {event.time}
-                          </Typography>
-                        </Box>
-
-
+                        <Typography variant="h5" fontWeight={600}>
+                          {event.date.day}
+                        </Typography>
+                        <Typography variant="caption">{event.date.month}</Typography>
                       </Box>
-                    ))}
-                  </Stack>
-                </CardContent>
-              </Card>
-            </Grid>
+                      <Box sx={{ flex: 1 }}>
+                        <Typography fontWeight={600}>{event.title}</Typography>
+                        <Typography variant="body2" color="text.secondary" sx={{ py: 1 }}>
+                          {event.location}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {event.time}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  ))}
+                </Stack>
+              </CardContent>
+            </Card>
+          </Box>
 
-            <Grid item xs={12} md={4}>
-              <Card sx={{
+          {/* Right section (4/12 columns) */}
+          <Box
+            sx={{
+              flex: { xs: '100%', md: 4 },
+              minWidth: { xs: '100%', md: '0' },
+            }}
+          >
+            <Card
+              sx={{
                 borderRadius: 4,
                 boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.25)',
                 display: 'flex',
                 width: '100%',
                 height: '100%',
-              }} >
-                <CardContent>
-                  <Box sx={{
+              }}
+            >
+              <CardContent sx={{ width: '100%' }}>
+                <Box
+                  sx={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'flex-start',
                     padding: '1.5rem',
                     borderBottom: '1px solid rgb(241, 245, 249)',
+                  }}
+                >
+                  <BoltIcon />
+                  <Typography variant="h6" fontWeight={600} sx={{ ml: 1 }}>
+                    Quick Actions
+                  </Typography>
+                </Box>
 
-                  }}>
-                    <BoltIcon /><Typography variant="h6" fontWeight={600}  >
-                      Quick Actions
-                    </Typography>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: 2,
+                    mt: 2,
+                  }}
+                >
+                  {quickActions.map((actions, index) => (
+                    <Box key={index} sx={{ width: 'calc(50% - 8px)' }}>
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          gap: '0.75rem',
+                          padding: '1.5rem',
+                          background: 'rgb(248, 250, 252)',
+                          color: 'black',
+                          border: '1px solid rgb(226, 232, 240)',
+                          borderRadius: '15px',
+                          width: '100%',
+                        }}
+                      >
+                        {actions.icon}
+                        <Typography sx={{ textTransform: 'none' }} fontWeight={400}>
+                          {actions.title}
+                        </Typography>
+                      </Button>
+                    </Box>
+                  ))}
+                </Box>
+              </CardContent>
+            </Card>
+          </Box>
+        </Box>
 
-                  </Box>
-
-                  <Grid container spacing={2}>
-                    {quickActions.map((actions, index) => (
-                      <Grid item xs={6} key={index}>
-                        <Button variant="outlined"
-                          sx={{
-
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            cursor: 'pointer',
-                            gap: '0.75rem',
-                            padding: '1.5rem',
-                            mt: 3,
-                            background: 'rgb(248, 250, 252)',
-                            color: 'black',
-                            borderWidth: '1px',
-                            borderStyle: 'solid',
-                            borderColor: 'rgb(226, 232, 240)',
-                            borderRadius: '15px',
-                            // width: '700px'
 
 
-                          }}>
-                          {actions.icon}
-                          <Typography sx={{ textTransform: 'none' }} fontWeight={400}>
-                            {actions.title}
-                          </Typography>
-
-                        </Button>
-                      </Grid>
-                    ))}
-                  </Grid>
-                </CardContent>
-              </Card>
-            </Grid>
-
-          </Grid>
-
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={3}>
-              <Card sx={{
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 3,
+            width: '100%',
+            mb: 4,
+          }}
+        >
+          {/* First Section - 3/12 */}
+          <Box sx={{ flex: { xs: '100%', md: 4 }, minWidth: 0 }}>
+            <Card
+              sx={{
                 borderRadius: 4,
                 boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
                 height: '100%',
-              }}>
-                <CardContent sx={{ p: 0 }}>
-                  <Box sx={{
+              }}
+            >
+              <CardContent sx={{ p: 0 }}>
+                <Box
+                  sx={{
                     display: 'flex',
                     alignItems: 'center',
                     p: 3,
                     borderBottom: '1px solid rgba(241, 245, 249, 1)',
-                  }}>
-                    <StyleIcon sx={{ mr: 1 }} />
-                    <Typography variant="h6" fontWeight={600}>
-                      Event Categories
-                    </Typography>
-                  </Box>
+                  }}
+                >
+                  <StyleIcon sx={{ mr: 1 }} />
+                  <Typography variant="h6" fontWeight={600}>
+                    Event Categories
+                  </Typography>
+                </Box>
 
-                  <Box sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                  }}>
-                    {[
-                      { name: 'Technology', count: 12, color: 'rgb(102, 126, 234)' },
-                      { name: 'Business', count: 8, color: 'rgb(240, 147, 251)' },
-                      { name: 'Design', count: 6, color: 'rgb(79, 172, 254)' },
-                      { name: 'Marketing', count: 4, color: 'rgb(67, 233, 123)' }
-                    ].map((category) => (
-                      <Box key={category.name} sx={{
+                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                  {[
+                    { name: 'Technology', count: 12, color: 'rgb(102, 126, 234)' },
+                    { name: 'Business', count: 8, color: 'rgb(240, 147, 251)' },
+                    { name: 'Design', count: 6, color: 'rgb(79, 172, 254)' },
+                    { name: 'Marketing', count: 4, color: 'rgb(67, 233, 123)' },
+                  ].map((category) => (
+                    <Box
+                      key={category.name}
+                      sx={{
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         p: 2,
                         px: 3,
                         borderBottom: '1px solid rgba(241, 245, 249, 1)',
-                      }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                          <Box sx={{
+                      }}
+                    >
+                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Box
+                          sx={{
                             width: 8,
                             height: 8,
                             borderRadius: '10px',
                             backgroundColor: category.color,
                             mr: 2,
-                          }} />
-                          <Typography fontWeight={600}>
-                            {category.name}
-                          </Typography>
-                        </Box>
-                        <Typography variant="body2" color="text.secondary" >
-                          {category.count} events
-                        </Typography>
+                          }}
+                        />
+                        <Typography fontWeight={600}>{category.name}</Typography>
                       </Box>
-                    ))}
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
+                      <Typography variant="body2" color="text.secondary">
+                        {category.count} events
+                      </Typography>
+                    </Box>
+                  ))}
+                </Box>
+              </CardContent>
+            </Card>
+          </Box>
 
-            <Grid item xs={12} md={3}>
-              <Card sx={{
+          {/* Second Section - 6/12 */}
+          <Box sx={{ flex: { xs: '100%', md: 4 }, minWidth: 0 }}>
+            <Card
+              sx={{
                 borderRadius: 4,
                 boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
                 height: '100%',
-
-
-              }}>
-                <CardContent sx={{ p: 0 }}>
-                  <Box sx={{
+              }}
+            >
+              <CardContent sx={{ p: 0 }}>
+                <Box
+                  sx={{
                     display: 'flex',
                     alignItems: 'center',
                     p: 3,
                     borderBottom: '1px solid rgba(241, 245, 249, 1)',
-                  }}>
-                    <RestoreIcon sx={{ mr: 1 }} />
-                    <Typography variant="h6" fontWeight={600}>
-                      Recent Activity
-                    </Typography>
-                  </Box>
-                  <Box >
-                    {[
-                      {
-                        icon: <PersonAddAlt1Icon sx={{ color: 'rgb(100, 116, 139)', fontSize: 20 }} />,
-                        text: <Typography><Bold>Sarah Johnson</Bold> registered for Tech Conference 2024</Typography>,
-                        time: '2 minutes ago'
-                      },
-                      {
-                        icon: <EventAvailableIcon sx={{ color: 'rgb(100, 116, 139)', fontSize: 20 }} />,
-                        text: <Typography>New event <Bold>Design Meetup</Bold> was created</Typography>,
-                        time: '1 hour ago'
-                      },
-                      {
-                        icon: <MailIcon sx={{ color: 'rgb(100, 116, 139)', fontSize: 20 }} />,
-                        text: <Typography>Reminder emails sent for <Bold>Marketing Workshop</Bold></Typography>,
-                        time: '3 hours ago'
-                      },
-                      {
-                        icon: <EditNoteIcon sx={{ color: 'rgb(100, 116, 139)', fontSize: 20 }} />,
-                        text: <Typography><Bold>Tech conference 2024</Bold> details updated</Typography>,
-                        time: '5 hours ago'
-                      }
-                    ].map((activity, index) => (
-                      <Box key={index} sx={{
+                  }}
+                >
+                  <RestoreIcon sx={{ mr: 1 }} />
+                  <Typography variant="h6" fontWeight={600}>
+                    Recent Activity
+                  </Typography>
+                </Box>
+                <Box>
+                  {[
+                    {
+                      icon: (
+                        <PersonAddAlt1Icon
+                          sx={{ color: 'rgb(100, 116, 139)', fontSize: 20 }}
+                        />
+                      ),
+                      text: (
+                        <Typography>
+                          <strong>Sarah Johnson</strong> registered for Tech Conference
+                          2024
+                        </Typography>
+                      ),
+                      time: '2 minutes ago',
+                    },
+                    {
+                      icon: (
+                        <EventAvailableIcon
+                          sx={{ color: 'rgb(100, 116, 139)', fontSize: 20 }}
+                        />
+                      ),
+                      text: (
+                        <Typography>
+                          New event <strong>Design Meetup</strong> was created
+                        </Typography>
+                      ),
+                      time: '1 hour ago',
+                    },
+                    {
+                      icon: (
+                        <MailIcon
+                          sx={{ color: 'rgb(100, 116, 139)', fontSize: 20 }}
+                        />
+                      ),
+                      text: (
+                        <Typography>
+                          Reminder emails sent for{' '}
+                          <strong>Marketing Workshop</strong>
+                        </Typography>
+                      ),
+                      time: '3 hours ago',
+                    },
+                    {
+                      icon: (
+                        <EditNoteIcon
+                          sx={{ color: 'rgb(100, 116, 139)', fontSize: 20 }}
+                        />
+                      ),
+                      text: (
+                        <Typography>
+                          <strong>Tech conference 2024</strong> details updated
+                        </Typography>
+                      ),
+                      time: '5 hours ago',
+                    },
+                  ].map((activity, index) => (
+                    <Box
+                      key={index}
+                      sx={{
                         display: 'flex',
                         alignItems: 'flex-start',
                         gap: '1rem',
                         p: 2,
                         borderRadius: 2,
                         borderBottom: '1px solid rgba(241, 245, 249, 1)',
-
-                      }}>
-                        <Box sx={{
+                      }}
+                    >
+                      <Box
+                        sx={{
                           mr: 2,
                           mt: 0.5,
                           display: 'flex',
@@ -476,112 +547,116 @@ const Dashboard = () => {
                           height: 40,
                           borderRadius: '50%',
                           backgroundColor: 'rgba(241, 245, 249, 1)',
-                        }}>
-                          {activity.icon}
-                        </Box>
-                        <Box>
-                          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            {activity.text}
-                          </Box>
-                          <Typography fontSize="0.75rem" color="rgb(148, 163, 184)" sx={{ pt: 1 }}>
-                            {activity.time}
-                          </Typography>
-                        </Box>
+                        }}
+                      >
+                        {activity.icon}
                       </Box>
-                    ))}
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
+                      <Box>
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                          {activity.text}
+                        </Box>
+                        <Typography
+                          fontSize="0.75rem"
+                          color="rgb(148, 163, 184)"
+                          sx={{ pt: 1 }}
+                        >
+                          {activity.time}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  ))}
+                </Box>
+              </CardContent>
+            </Card>
+          </Box>
 
-            <Grid item xs={12} md={3}>
-              <Card sx={{
+          {/* Third Section - 3/12 */}
+          <Box sx={{ flex: { xs: '100%', md: 4 }, minWidth: 0 }}>
+            <Card
+              sx={{
                 borderRadius: 4,
                 boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
                 height: '100%',
-              }}>
-                <CardContent>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DateCalendar
-                      sx={{
-                        width: '100%',
-
-                        '& .MuiPickersCalendarHeader-root': {
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          padding: '1.5rem',
-                          marginBottom: '0.5rem',
-                          borderBottom: '1px solid rgb(241, 245, 249)',
+              }}
+            >
+              <CardContent>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DateCalendar
+                    sx={{
+                      width: '100%',
+                      '& .MuiPickersCalendarHeader-root': {
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '1.5rem',
+                        marginBottom: '0.5rem',
+                        borderBottom: '1px solid rgb(241, 245, 249)',
+                      },
+                      '& .MuiPickersCalendarHeader-label': {
+                        fontWeight: 600,
+                        fontSize: '1.125rem',
+                        color: 'rgb(30, 41, 59)',
+                      },
+                      '& .MuiPickersArrowSwitcher-root': {
+                        display: 'flex',
+                        gap: '0.5rem',
+                      },
+                      '& .MuiIconButton-root': {
+                        color: 'rgb(100, 116, 139)',
+                        padding: '0.25rem',
+                        '&:hover': {
+                          backgroundColor: 'rgba(241, 245, 249, 1)',
                         },
-                        '& .MuiPickersCalendarHeader-label': {
-                          fontWeight: 600,
-                          fontSize: '1.125rem',
-                          color: 'rgb(30, 41, 59)',
-                        },
-                        '& .MuiPickersArrowSwitcher-root': {
-                          display: 'flex',
-                          gap: '0.5rem',
-                        },
-                        '& .MuiIconButton-root': {
-                          color: 'rgb(100, 116, 139)',
-                          padding: '0.25rem',
-                          '&:hover': {
-                            backgroundColor: 'rgba(241, 245, 249, 1)',
-                          },
-                        },
-                        '& .MuiPickersDay-root': {
-                          fontWeight: 400,
-                          width: '40px',
-                          height: '40px',
-                          margin: '0 2px',
-                          fontSize: '0.9rem',
-                        },
-                        '& .MuiDayCalendar-weekDayLabel': {
-                          fontWeight: 600,
-                          color: 'rgb(100, 116, 139)',
-                          width: '40px',
-                          height: '40px',
-                          margin: '0 2px',
-                          fontSize: '0.875rem',
-                        },
-                        '& .MuiPickersDay-today': {
-                          border: '1px solid',
-                          borderColor: 'primary.main',
-                          backgroundColor: 'transparent',
-                        },
-                        '& .MuiDayCalendar-header': {
-                          justifyContent: 'space-around',
-                          marginBottom: '0.5rem',
-                        },
-                      }}
-                      slotProps={{
-                        day: {
-                          sx: {
-                            '&.Mui-selected': {
-                              backgroundColor: 'primary.main',
-                              color: 'white',
-                              '&:hover': {
-                                backgroundColor: 'primary.dark',
-                              },
+                      },
+                      '& .MuiPickersDay-root': {
+                        fontWeight: 400,
+                        width: '40px',
+                        height: '40px',
+                        margin: '0 2px',
+                        fontSize: '0.9rem',
+                      },
+                      '& .MuiDayCalendar-weekDayLabel': {
+                        fontWeight: 600,
+                        color: 'rgb(100, 116, 139)',
+                        width: '40px',
+                        height: '40px',
+                        margin: '0 2px',
+                        fontSize: '0.875rem',
+                      },
+                      '& .MuiPickersDay-today': {
+                        border: '1px solid',
+                        borderColor: 'primary.main',
+                        backgroundColor: 'transparent',
+                      },
+                      '& .MuiDayCalendar-header': {
+                        justifyContent: 'space-around',
+                        marginBottom: '0.5rem',
+                      },
+                    }}
+                    slotProps={{
+                      day: {
+                        sx: {
+                          '&.Mui-selected': {
+                            backgroundColor: 'primary.main',
+                            color: 'white',
+                            '&:hover': {
+                              backgroundColor: 'primary.dark',
                             },
                           },
                         },
-                      }}
-                      showDaysOutsideCurrentMonth
-                      fixedWeekNumber={6}
-                    />
-                  </LocalizationProvider>
-                </CardContent>
-              </Card>
-            </Grid>
+                      },
+                    }}
+                    showDaysOutsideCurrentMonth
+                    fixedWeekNumber={6}
+                  />
+                </LocalizationProvider>
+              </CardContent>
+            </Card>
+          </Box>
+        </Box>
 
 
-
-
-          </Grid>
-
-        </Grid>
+        {/* </Grid> */}
 
       </Box>
     </Box >
