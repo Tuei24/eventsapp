@@ -8,19 +8,29 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Sidebar = ({ selectedMenu, setSelectedMenu, drawerWidth }) => {
   const menuItems = [
-    { text: 'Dashboard', icon: <DashboardIcon sx={{ color: 'white' }} /> },
-    { text: 'Calender', icon: <CalendarTodayIcon sx={{ color: 'white' }} /> },
-    { text: 'Events', icon: <EventNoteIcon sx={{ color: 'white' }} /> },
-    { text: 'Attendees', icon: <GroupsIcon sx={{ color: 'white' }} /> },
-    { text: 'Analytics', icon: <AnalyticsIcon sx={{ color: 'white' }} /> },
-    { text: 'Settings', icon: <SettingsApplicationsIcon sx={{ color: 'white' }} /> },
+    { text: 'Dashboard', icon: <DashboardIcon sx={{ color: 'white' }} />, link: '/Admin/Dashboard' },
+    { text: 'Calendar', icon: <CalendarTodayIcon sx={{ color: 'white' }} />, link: '/Admin/Calendar' },
+    { text: 'Events', icon: <EventNoteIcon sx={{ color: 'white' }} />, link: '/Admin/Events' },
+    { text: 'Attendees', icon: <GroupsIcon sx={{ color: 'white' }} />, link: '/Admin/Attendees' },
+    { text: 'Analytics', icon: <AnalyticsIcon sx={{ color: 'white' }} />, link: '/Admin/Analytics' },
+    { text: 'Settings', icon: <SettingsApplicationsIcon sx={{ color: 'white' }} />, link: '/Admin/Settings' },
   ];
 
-  const handleMenuClick = (text) => {
+  let navigate = useNavigate();
+
+
+  const handleMenuClick = (text, link) => {
+    console.log(link, "linkkkkkk")
     setSelectedMenu(text);
+    navigate(link)
+
+
   };
 
   return (
@@ -68,7 +78,8 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, drawerWidth }) => {
               button
               key={item.text}
               selected={selectedMenu === item.text}
-              onClick={() => handleMenuClick(item.text)}
+              onClick={() => handleMenuClick(item.text, item.link)}
+
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />

@@ -16,25 +16,18 @@ import FileDownloadRoundedIcon from '@mui/icons-material/FileDownloadRounded';
 import StyleIcon from '@mui/icons-material/Style';
 import RestoreIcon from '@mui/icons-material/Restore';
 import EditNoteIcon from '@mui/icons-material/EditNote';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import dayjs from 'dayjs';
 import ArrowLeft from '@mui/icons-material/ArrowLeft';
 import ArrowRight from '@mui/icons-material/ArrowRight';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
 
 
 import '../App.css'
 
 const drawerWidth = 250;
-const Bold = ({ children }) => <span style={{ fontWeight: 600 }}>{children}</span>
-const slots = {
-  leftArrowIcon: ArrowLeft,
-  rightArrowIcon: ArrowRight,
-};
+
 
 const DashboardCard = ({ title, value, percentage, icon, iconBg }) => (
 
