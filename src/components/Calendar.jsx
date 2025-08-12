@@ -1,97 +1,64 @@
 import React, { useState } from 'react';
-import { Box, Grid, Paper, Button, CssBaseline, Typography, Divider, IconButton, Card, CardContent } from '@mui/material';
+import { Box, Grid, Button, CssBaseline, Typography, Divider, IconButton, Card, CardContent } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
 const drawerWidth = 250;
 
 const eventsToday = [
-  {
-    time: '9:00 AM',
-    title: 'Team Standup',
-    location: 'Video Call',
-
-  },
-  {
-    time: '2:00 PM',
-    title: 'Client Presentation',
-    location: 'Conference Room A',
-
-  },
-  {
-    time: '6:00 PM',
-    title: 'Tech Conference 2024',
-    location: 'San Francisco, CA',
-
-  }
+  { time: '9:00 AM', title: 'Team Standup', location: 'Video Call' },
+  { time: '2:00 PM', title: 'Client Presentation', location: 'Conference Room A' },
+  { time: '6:00 PM', title: 'Tech Conference 2024', location: 'San Francisco, CA' }
 ];
 
 const upcomingEvents = [
   { date: '28 JUL', title: 'Marketing Workshop', time: '2:00 PM - 5:00 PM' },
-  { date: '02 AUG', title: 'Design Meetup', time: '7:00 PM - 10:00 PM' },
+  { date: '02 AUG', title: 'Design Meetup', time: '7:00 PM - 10:00 PM' }
+];
+
+const monthNames = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
 const Calendar = () => {
   const [selectedMenu, setSelectedMenu] = useState('Calender');
-  const [currentDate, setCurrentDate] = useState(new Date());
-
-  const monthNames = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ];
-
-  const currentMonth = currentDate.getMonth();
-  const currentYear = currentDate.getFullYear();
-
-  const getDaysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
-  const getFirstDayOfMonth = (month, year) => new Date(year, month, 1).getDay();
-
-  const daysInMonth = getDaysInMonth(currentMonth, currentYear);
-  const firstDay = getFirstDayOfMonth(currentMonth, currentYear);
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
   const handlePrevMonth = () => {
-    setCurrentDate(prev => new Date(prev.getFullYear(), prev.getMonth() - 1, 1));
+    setCurrentMonth(prev => (prev === 0 ? 11 : prev - 1));
+    if (currentMonth === 0) {
+      setCurrentYear(prev => prev - 1);
+    }
   };
 
   const handleNextMonth = () => {
-    setCurrentDate(prev => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
+    setCurrentMonth(prev => (prev === 11 ? 0 : prev + 1));
+    if (currentMonth === 11) {
+      setCurrentYear(prev => prev + 1);
+    }
   };
 
-  const renderCalendarCells = () => {
-    const totalCells = firstDay + daysInMonth;
-    const cells = [];
+  const buttonStyles = {
+    borderRadius: '10px',
+    background: 'rgb(248, 250, 252)',
+    color: 'black',
+    border: '1px solid rgb(226, 232, 240)',
+  };
 
-    for (let i = 0; i < totalCells; i++) {
-      if (i < firstDay) {
-        cells.push(
-          <Grid item xs={1.71} key={`empty-${i}`}>
-            <Box height={60}></Box>
-          </Grid>
-        );
-      } else {
-        const day = i - firstDay + 1;
-        cells.push(
-          <Grid item xs={1.71} key={day}>
-            <Box
-              height={60}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              borderRadius={1}
-              bgcolor={day === 15 ? '#eef1ff' : 'transparent'}
-              color={day === 15 ? '#6C63FF' : 'inherit'}
-            >
-              {day}
-            </Box>
-          </Grid>
-        );
-      }
-    }
-
-    return cells;
+  const buttonContainedStyles = {
+    borderRadius: '10px',
+    background: 'linear-gradient(135deg, #667eea, #764ba2 100%)',
+    color: 'white',
+    px: 1,
+    py: 1,
   };
 
   return (
@@ -100,99 +67,140 @@ const Calendar = () => {
       <Topbar selectedMenu={selectedMenu} drawerWidth={drawerWidth} />
       <Sidebar selectedMenu={selectedMenu} setSelectedMenu={setSelectedMenu} drawerWidth={drawerWidth} />
 
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          marginLeft: `${drawerWidth}px`,
-          marginTop: '64px'
-        }}
-      >
-        <Paper
-          elevation={1}
-          sx={{
-            p: 3,
-            mb: 3,
+      <Box component="main" 
+      sx={{ 
+        flexGrow: 1, p: 3, 
+        marginLeft: `${drawerWidth}px`, 
+        marginTop: '64px' }}>
+           <Box 
+           sx={{
             display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
             flexWrap: 'wrap',
-          }}
-        >
+            width: '100%',
+            gap: 3,
+            mb: 4,
+            }}>
+                 
+        <Box
+        sx={{
+          flex: { xs: '100%', md: 12 },
+          minWidth: { xs: '100%', md: '0' },
+        }}>
+          <Card
+          sx={{
+            borderRadius: 4,
+            boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.25)',
+            px: 3,
+              }}
+            >
+               <CardContent>
+                <Box
+                sx={{   
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'center', 
+                  flexWrap: 'wrap' }}>
 
           <Box display="flex" alignItems="center" gap={2}>
-            <IconButton onClick={handlePrevMonth}>
-              <ArrowBackIosNewIcon fontSize="small" />
-            </IconButton>
-            <Typography variant="h6" fontWeight="bold">
-              {monthNames[currentMonth]} {currentYear}
-            </Typography>
-            <IconButton onClick={handleNextMonth}>
-              <ArrowForwardIosIcon fontSize="small" />
-            </IconButton>
+            <IconButton onClick={handlePrevMonth}><ArrowBackIosNewIcon fontSize="small" /></IconButton>
+            <Typography variant="h6" fontWeight="bold">{monthNames[currentMonth]} {currentYear}</Typography>
+            <IconButton onClick={handleNextMonth}><ArrowForwardIosIcon fontSize="small" /></IconButton>
           </Box>
-
 
           <Box display="flex" alignItems="center" gap={2} flexWrap="wrap">
-            <Button variant="outlined">Month</Button>
-            <Button variant="outlined">Week</Button>
-            <Button variant="outlined">Day</Button>
-            <Button
-              variant="contained"
-              startIcon={<AddIcon />}
-              sx={{ backgroundColor: '#6C63FF' }}
-            >
-              Add Event
-            </Button>
+            <Button variant="outlined" sx={buttonStyles}>Month</Button>
+            <Button variant="outlined" sx={buttonStyles}>Week</Button>
+            <Button variant="outlined" sx={buttonStyles}>Day</Button>
+            <Button variant="contained" startIcon={<AddIcon />} sx={buttonContainedStyles}>Add Event</Button>
           </Box>
-        </Paper>
+        </Box>
+        </CardContent>
+        </Card>
+        </Box>
+        </Box>
 
-        <Grid container spacing={2}>
+        <Box 
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          width: '100%',
+          gap: 3,
+          mb: 4,
+        }}>
+         
+        <Box
+        sx={{
+          flex: { xs: '100%', md: 8 },
+          minWidth: { xs: '100%', md: '0' },
+        }}>
+            <Card
+            sx={{
+              borderRadius: 4,
+              boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.25)',
+              display: 'flex',
+              width: '100%',
+              height: '100%', 
+              
+            }}>
+              
+              <CardContent sx={{ width: '100%', px: 2, py: 2 }}>
+                
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DateCalendar sx={{ maxWidth: '100%', mx: 'auto' }} />
+                    </LocalizationProvider>
+                
+              </CardContent>
+           </Card>
+        </Box>
 
-          <Grid item xs={12} md={8}>
-            <Paper elevation={1} sx={{ p: 3 }}>
-              <Grid container spacing={1}>
-                {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map((day) => (
-                  <Grid item xs={1.71} key={day}>
-                    <Typography variant="subtitle2" align="center">{day}</Typography>
-                  </Grid>
-                ))}
-                {renderCalendarCells()}
-              </Grid>
-            </Paper>
-          </Grid>
-        </Grid>
-
-
-        <Grid item xs={12} md={4}>
-          <Paper elevation={1} sx={{ p: 3 }}>
-            <Typography variant="h6" gutterBottom>Today's Events</Typography>
-            {eventsToday.map((event, index) => (
-              <Box key={index} mb={2}>
-                <Typography variant="subtitle2" color="#6C63FF">{event.time}</Typography>
-                <Typography fontWeight="bold">{event.title}</Typography>
-                <Typography variant="body2" color="text.secondary">{event.location}</Typography>
-                <Divider sx={{ my: 1 }} />
+           <Box
+            sx={{
+              flex: { xs: '100%', md: 4 },
+              minWidth: { xs: '100%', md: '0' },
+            }}>
+              <Card
+            sx={{
+              borderRadius: 4,
+              boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.25)',
+              display: 'flex',
+              width: '100%',
+              height: '100%',
+              
+            }}>
+              <CardContent sx={{p: 3}}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', mb: 3, borderBottom: '1px solid rgba(0, 0, 0, 0.12)' }}>
+                <Typography variant="h6" fontWeight={600}>Today's Events</Typography>
               </Box>
-            ))}
-
-            <Typography variant="h6" gutterBottom mt={4}>Upcoming This Week</Typography>
-            {upcomingEvents.map((event, index) => (
-              <Paper key={index} sx={{ p: 2, my: 1, backgroundColor: '#f4f6ff' }}>
-                <Typography variant="caption" color="text.secondary">{event.date}</Typography>
-                <Typography fontWeight="bold">{event.title}</Typography>
-                <Typography variant="body2" color="text.secondary">{event.time}</Typography>
-              </Paper>
-            ))}
-          </Paper>
-        </Grid>
-
+              {eventsToday.map((event, index) => (
+                <Box key={index} display="flex" alignItems="center" sx={{ flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: 2, sm: 0 } }} mb={2}>
+                  <Box sx={{ background: 'linear-gradient(135deg, #667eea, #764ba2 100%)', color: 'white', borderRadius: 2, px: 2, py: 4, textAlign: 'center', mr: 2 }}>
+                    <Typography variant="subtitle2">{event.time}</Typography>
+                  </Box>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography fontWeight="bold">{event.title}</Typography>
+                    <Typography variant="body2" color="text.secondary">{event.location}</Typography>
+                    <Divider sx={{ my: 1 }} />
+                  </Box>
+                </Box>
+              ))}
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', mb: 3, borderBottom: '1px solid rgba(0, 0, 0, 0.12)' }}>
+                <Typography variant="h6" gutterBottom mt={4} fontWeight={600}>Upcoming This Week</Typography>
+              </Box>
+              {upcomingEvents.map((event, index) => (
+                <Box key={index} sx={{ p: 2, my: 1, backgroundColor: '#f4f6ff' }}>
+                  <Typography variant="caption" color="text.secondary">{event.date}</Typography>
+                  <Typography fontWeight="bold">{event.title}</Typography>
+                  <Typography variant="body2" color="text.secondary">{event.time}</Typography>
+                </Box>
+              ))}
+            </CardContent>
+            </Card>
+          </Box>
+        </Box>
       </Box>
     </Box>
-
-
   );
 };
 
 export default Calendar;
+
