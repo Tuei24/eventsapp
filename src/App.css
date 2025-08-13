@@ -95,9 +95,9 @@ button a {
 }
 
 body {
-  /* display: flex;
+   display: flex;
   justify-content: center;
-  align-items: center; */
+  align-items: center; 
 
 }
 
@@ -185,11 +185,3 @@ form button:hover {
   padding: 20px;
 }
 
-/*.upcoming-events {
-  display: flex;
-
-}
-
-.upcoming-events-card {
-  width: 60% !important;
-}*/
