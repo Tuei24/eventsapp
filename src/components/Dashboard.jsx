@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { Box, CssBaseline, Grid, Card, CardContent, Typography, Stack, Button, IconButton } from '@mui/material'
+import { Box, CssBaseline, Card, CardContent, Typography, Stack, Button, IconButton } from '@mui/material'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Groups2Icon from '@mui/icons-material/Groups2';
@@ -16,15 +16,9 @@ import FileDownloadRoundedIcon from '@mui/icons-material/FileDownloadRounded';
 import StyleIcon from '@mui/icons-material/Style';
 import RestoreIcon from '@mui/icons-material/Restore';
 import EditNoteIcon from '@mui/icons-material/EditNote';
-import ArrowLeft from '@mui/icons-material/ArrowLeft';
-import ArrowRight from '@mui/icons-material/ArrowRight';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-
-
-
-import '../App.css'
 
 const drawerWidth = 250;
 
@@ -39,14 +33,12 @@ const DashboardCard = ({ title, value, percentage, icon, iconBg }) => (
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      pl: 3,
-      pr: 15,
-      pt: 3,
-
+      flexWrap: 'wrap',
+      p: 2,
     }}
   >
     <CardContent sx={{ p: 0 }}>
-      <Stack direction="row" spacing={2} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <Stack direction="row" spacing={2} sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
         <Box
           sx={{
             background: iconBg,
@@ -64,7 +56,7 @@ const DashboardCard = ({ title, value, percentage, icon, iconBg }) => (
         </Box>
 
         <Box>
-          <Typography variant="h4" fontWeight="700" sx={{ lineHeight: 1.9 }}>
+          <Typography variant="h4" fontWeight="700" sx={{ lineHeight: 1.9}}>
             {value}
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.5, pb: 1 }}>
@@ -182,20 +174,32 @@ const Dashboard = () => {
           mt: '64px',
           p: { xs: 2, sm: 3 },
           minHeight: 'calc(100vh - 64px)',
+          display: 'flex',
+          flexWrap: 'wrap',
         }}
       >
-        <Grid
-          container
-          spacing={3}
+        <Box
           sx={{
-            mb: 4,
+            display: 'flex',
+            flexWrap: 'wrap',
             width: '100%',
-            mx: 0,
-            px: 0,
+            gap: 3,
+            mb: 4,
           }}
         >
-          {cardData.map((card, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
+          {cardData.slice(0,4).map((card, index) => (
+            <Box
+              key={index}
+              sx={{
+              flex: {
+                  xs: '100%',
+                  md: 3,
+                    },
+                  minWidth: {
+                  xs: '100%',
+                  md: 0,
+                            },
+                  }}>
               <DashboardCard
                 value={card.value}
                 title={card.title}
@@ -203,9 +207,9 @@ const Dashboard = () => {
                 icon={card.icon}
                 iconBg={card.iconBg}
               />
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Box>
 
 
 
@@ -218,7 +222,7 @@ const Dashboard = () => {
             mb: 4,
           }}
         >
-          {/* Left section (8/12 columns) */}
+          
           <Box
             sx={{
               flex: { xs: '100%', md: 8 },
@@ -305,7 +309,7 @@ const Dashboard = () => {
             </Card>
           </Box>
 
-          {/* Right section (4/12 columns) */}
+          
           <Box
             sx={{
               flex: { xs: '100%', md: 4 },
@@ -386,7 +390,7 @@ const Dashboard = () => {
             mb: 4,
           }}
         >
-          {/* First Section - 3/12 */}
+          
           <Box sx={{ flex: { xs: '100%', md: 4 }, minWidth: 0 }}>
             <Card
               sx={{
@@ -450,7 +454,7 @@ const Dashboard = () => {
             </Card>
           </Box>
 
-          {/* Second Section - 6/12 */}
+        
           <Box sx={{ flex: { xs: '100%', md: 4 }, minWidth: 0 }}>
             <Card
               sx={{
@@ -575,7 +579,7 @@ const Dashboard = () => {
             </Card>
           </Box>
 
-          {/* Third Section - 3/12 */}
+          
           <Box sx={{ flex: { xs: '100%', md: 4 }, minWidth: 0 }}>
             <Card
               sx={{

@@ -7,6 +7,7 @@ import Register from './components/Register'
 import Posts from './components/Posts'
 import Dashboard from './components/Dashboard'
 import Calendar from './components/Calendar'
+import Events from './components/Events'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/Posts" element={<Posts />} />
           <Route path="Admin/Dashboard" element={<Dashboard />} />
           <Route path="Admin/Calendar" element={<Calendar />} />
+          <Route path="Admin/Events" element={<Events />} />
 
         </Routes>
       </BrowserRouter>
