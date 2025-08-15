@@ -208,10 +208,8 @@ const Calendar = () => {
                 <Typography variant="h6" fontWeight={600}>Today's Events</Typography>
               </Box>
               {eventsToday.map((event, index) => (
-                <Box key={index} display="flex" alignItems="center" sx={{ flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: 2, sm: 0 } }} mb={2}>
-                  <Box sx={{ background: 'linear-gradient(135deg, #667eea, #764ba2 100%)', color: 'white', borderRadius: 2, px: 1, py: 4, textAlign: 'center', mr: 2 }}>
-                    <Typography variant="subtitle2" fontSize="1.5rem">{event.time}</Typography>
-                  </Box>
+                <Box key={index} display="flex" alignItems="flex-start" sx={{ flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: 2, sm: 0 } }} mb={2}>
+                    <Typography variant="body2" color="text.secondary" fontSize="0.75rem" px={2} pt={0.75}>{event.time}</Typography>
                   <Box sx={{ flex: 1 }}>
                     <Typography fontWeight="bold">{event.title}</Typography>
                     <Typography variant="body2" color="text.secondary">{event.location}</Typography>
@@ -223,10 +221,14 @@ const Calendar = () => {
                 <Typography variant="h6" gutterBottom mt={4} fontWeight={600}>Upcoming This Week</Typography>
               </Box>
               {upcomingEvents.map((event, index) => (
-                <Box key={index} sx={{ px: 3, py: 2, my: 1, backgroundColor: '#f4f6ff', borderRadius: 2 }}>
-                  <Typography variant="caption" color="text.secondary">{event.date}</Typography>
+                <Box key={index} display="flex" alignItems="center" sx={{ flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: 2, sm: 0 },px: 2, py: 2, my: 1, backgroundColor: '#f4f6ff', borderRadius: 2 }} mb={2}>
+                  <Box sx={{ background: 'linear-gradient(135deg, #667eea, #764ba2 100%)', color: 'white', borderRadius: 2, px: 2, py: 3, textAlign: 'center', mr: 2 }}>
+                  <Typography variant="subtitle4" color="text.secondary"  fontWeight={600}>{event.date}</Typography>
+                  </Box>
+                  <Box sx={{ flexDirection: 'column'}}>
                   <Typography fontWeight="bold">{event.title}</Typography>
                   <Typography variant="body2" color="text.secondary">{event.time}</Typography>
+                  </Box>
                 </Box>
               ))}
             </CardContent>
