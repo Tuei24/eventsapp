@@ -20,7 +20,8 @@ const Topbar = ({ selectedMenu, drawerWidth }) => {
           <b>{selectedMenu}</b>
         </Typography>
 
-        <Box
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <Box
           sx={{
             display: 'flex',
             alignItems: 'center',
@@ -33,8 +34,7 @@ const Topbar = ({ selectedMenu, drawerWidth }) => {
           <SearchIcon sx={{ mr: 1 }} />
           <InputBase placeholder="Search events…" fullWidth />
         </Box>
-
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        
           <IconButton size="large" aria-label="show 3 new notifications" color="inherit">
             <Badge badgeContent={3} color="error">
               <NotificationsIcon />

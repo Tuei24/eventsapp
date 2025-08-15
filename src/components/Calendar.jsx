@@ -48,10 +48,9 @@ const Calendar = () => {
 
   const buttonStyles = {
     borderRadius: '10px',
-    background: 'rgb(248, 250, 252)',
+    background: 'rgb(242, 242, 242)',
     color: 'black',
-    border: '1px solid rgb(226, 232, 240)',
-
+    border: '0.5px solid rgb(237, 237, 237)',
   };
 
   const buttonContainedStyles = {

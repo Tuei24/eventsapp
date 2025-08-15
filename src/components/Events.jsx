@@ -64,7 +64,7 @@ const Events = () => {
         },
     ];
 
-     const eventDetails = [
+     const technologyDetails = [
          { 
             icon: <CalendarTodayRoundedIcon sx={{fontSize: '18px'}} />,
             name: 'July 25, 2024', 
@@ -83,7 +83,7 @@ const Events = () => {
         },
       ];
 
-      const eventStatistics =[
+      const technologyStatistics =[
         {
             value: '234',
             title: 'ATTENDEES',
@@ -97,14 +97,115 @@ const Events = () => {
             title: 'REVENUE',
         }
       ]
+
+      const marketingDetails = [
+         { 
+            icon: <CalendarTodayRoundedIcon sx={{fontSize: '18px'}} />,
+            name: 'July 28, 2024', 
+         },
+         {
+            icon: <WatchLaterRoundedIcon sx={{fontSize: '20px'}} />,
+            name: '2:00PM-5:00PM',  
+        },
+         { 
+            icon: <LocationOnRoundedIcon sx={{fontSize: '20px'}}/>,
+            name: 'New York, NY',  
+        },
+        {
+            icon: <LocalOfferRoundedIcon sx={{fontSize: '20px'}}/>,
+            name: 'MARKETING', 
+        },
+      ];
+
+      const marketingStatistics =[
+        {
+            value: '89',
+            title: 'ATTENDEES',
+        },
+        {
+            value: '74%',
+            title: 'CAPACITY',  
+        },
+        {
+            value: '$4,250',
+            title: 'REVENUE',
+        }
+      ];
+
+      const designDetails = [
+         { 
+            icon: <CalendarTodayRoundedIcon sx={{fontSize: '18px'}} />,
+            name: 'July 22, 2024', 
+         },
+         {
+            icon: <WatchLaterRoundedIcon sx={{fontSize: '20px'}} />,
+            name: '7:00PM-10:00PM',  
+        },
+         { 
+            icon: <LocationOnRoundedIcon sx={{fontSize: '20px'}}/>,
+            name: 'Los Angeles, CA',  
+        },
+        {
+            icon: <LocalOfferRoundedIcon sx={{fontSize: '20px'}}/>,
+            name: 'DESIGN', 
+        },
+      ];
+
+      const designStatistics =[
+        {
+            value: '156',
+            title: 'ATTENDEES',
+        },
+        {
+            value: '95%',
+            title: 'CAPACITY',  
+        },
+        {
+            value: '$7,800',
+            title: 'REVENUE',
+        }
+      ];
+
+      const businessDetails = [
+         { 
+            icon: <CalendarTodayRoundedIcon sx={{fontSize: '18px'}} />,
+            name: 'July 15, 2024', 
+         },
+         {
+            icon: <WatchLaterRoundedIcon sx={{fontSize: '20px'}} />,
+            name: '8:00AM-7:00PM',  
+        },
+         { 
+            icon: <LocationOnRoundedIcon sx={{fontSize: '20px'}}/>,
+            name: 'Chicago, IL',  
+        },
+        {
+            icon: <LocalOfferRoundedIcon sx={{fontSize: '20px'}}/>,
+            name: 'BUSINESS', 
+        },
+      ];
+
+      const businessStatistics =[
+        {
+            value: '312',
+            title: 'ATTENDEES',
+        },
+        {
+            value: '100%',
+            title: 'CAPACITY',  
+        },
+        {
+            value: '$18,720',
+            title: 'REVENUE',
+        }
+      ]
     
 
     const buttonStyles = {
     borderRadius: '10px',
-    background: 'rgb(248, 250, 252)',
+    background: 'rgb(242, 242, 242)',
     color: 'black',
-    border: '1px solid rgb(226, 232, 240)',
-
+    border: '0.5px solid rgb(237, 237, 237)',
   };
 
   const buttonContainedStyles = {
@@ -290,7 +391,7 @@ const Events = () => {
                             pl: 1,
 
                             }}>
-                          {eventDetails.map((details, index) => (
+                          {technologyDetails.map((details, index) => (
                             <Box
                             key={index}
                             sx={{
@@ -316,7 +417,7 @@ const Events = () => {
                             </Box>
                         ))}
 
-                        {eventStatistics.map((statistics, index) =>(
+                        {technologyStatistics.map((statistics, index) =>(
                             <Box key={index}
                             sx={{
                                 display: 'flex',
@@ -334,7 +435,7 @@ const Events = () => {
                         </Box>
 
                         <Box display="flex" alignItems="center" flexWrap="wrap"  >
-                            <Typography sx={{px: 1, py: 4}}>Join us for the biggest techonolgy conference of the year featuring keynotes from industry leaders, hands-on experience and networking opportunities</Typography>
+                            <Typography sx={{px: 1, py: 4}}>Join us for the biggest technology conference of the year featuring keynotes from industry leaders, hands-on workshops, and networking opportunities.</Typography>
                         </Box>
                              
                         <Box sx={{ 
@@ -357,7 +458,7 @@ const Events = () => {
                                         height: 40,
                                         fontSize: '0.875rem',
                                         fontWeight: 400,
-                                    }} >+228</Avatar>
+                                    }} >+230</Avatar>
                             </Stack>
                             <Button variant="outlined" sx={buttonStyles} >View all</Button>
                         </Box>
@@ -398,7 +499,7 @@ const Events = () => {
                             borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
                            }}>
                             <Box display="flex" alignItems="center" gap={2} flexWrap="wrap">
-                            <Typography variant="h6" fontWeight={600}>Tech Conference 2024</Typography>
+                            <Typography variant="h6" fontWeight={600}>Marketing Workshop</Typography>
                             <Button sx={{fontWeight: 600, borderRadius: 3, backgroundColor:'#DEECFC', color:'##1141C2' }}>UPCOMING</Button>
                             </Box>
                             <Box display="flex" alignItems="center" gap={2} flexWrap="wrap" >
@@ -418,7 +519,7 @@ const Events = () => {
                             pl: 1,
 
                             }}>
-                          {eventDetails.map((details, index) => (
+                          {marketingDetails.map((details, index) => (
                             <Box
                             key={index}
                             sx={{
@@ -430,10 +531,10 @@ const Events = () => {
                             <Typography
                               sx={{
                                   pl: 1,
-                                  backgroundColor: details.name === 'TECHNOLOGY' ? '#F2E3FC' : 'transparent',
-                                  borderRadius: details.name === 'TECHNOLOGY' ? 2 : 0,
-                                  color: details.name === 'TECHNOLOGY' ? '#8251A8' : 'inherit',
-                                  fontWeight: details.name === 'TECHNOLOGY' ? 600 : 'normal',
+                                  backgroundColor: details.name === 'MARKETING' ? '#F2E3FC' : 'transparent',
+                                  borderRadius: details.name === 'MARKETING' ? 2 : 0,
+                                  color: details.name === 'MARKETING' ? '#8251A8' : 'inherit',
+                                  fontWeight: details.name === 'MARKETING' ? 600 : 'normal',
                                   px: 0.5 ,
                                   py: 0.5,
                                   fontSize: '13px'
@@ -444,7 +545,7 @@ const Events = () => {
                             </Box>
                         ))}
 
-                        {eventStatistics.map((statistics, index) =>(
+                        {marketingStatistics.map((statistics, index) =>(
                             <Box key={index}
                             sx={{
                                 display: 'flex',
@@ -462,7 +563,7 @@ const Events = () => {
                         </Box>
 
                         <Box display="flex" alignItems="center" flexWrap="wrap"  >
-                            <Typography sx={{px: 1, py: 4}}>Join us for the biggest techonolgy conference of the year featuring keynotes from industry leaders, hands-on experience and networking opportunities</Typography>
+                            <Typography sx={{px: 1, py: 4}}>Learn the latest marketing strategies and tactics from industry experts. Perfect for marketing professionals looking to enhance their skills.</Typography>
                         </Box>
                              
                         <Box sx={{ 
@@ -485,7 +586,7 @@ const Events = () => {
                                         height: 40,
                                         fontSize: '0.875rem',
                                         fontWeight: 400,
-                                    }} >+228</Avatar>
+                                    }} >+86</Avatar>
                             </Stack>
                             <Button variant="outlined" sx={buttonStyles} >View all</Button>
                         </Box>
@@ -526,8 +627,8 @@ const Events = () => {
                             borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
                            }}>
                             <Box display="flex" alignItems="center" gap={2} flexWrap="wrap">
-                            <Typography variant="h6" fontWeight={600}>Tech Conference 2024</Typography>
-                            <Button sx={{fontWeight: 600, borderRadius: 3, backgroundColor:'#DEECFC', color:'##1141C2' }}>UPCOMING</Button>
+                            <Typography variant="h6" fontWeight={600}>Design Meetup</Typography>
+                            <Button sx={{fontWeight: 600, borderRadius: 3, backgroundColor:'#DEECFC', color:'##1141C2' }}>ONGOING</Button>
                             </Box>
                             <Box display="flex" alignItems="center" gap={2} flexWrap="wrap" >
                             <Button variant="outlined" sx={buttonStyles}>{<EditNoteRoundedIcon />}</Button>
@@ -546,7 +647,7 @@ const Events = () => {
                             pl: 1,
 
                             }}>
-                          {eventDetails.map((details, index) => (
+                          {designDetails.map((details, index) => (
                             <Box
                             key={index}
                             sx={{
@@ -558,10 +659,10 @@ const Events = () => {
                             <Typography
                               sx={{
                                   pl: 1,
-                                  backgroundColor: details.name === 'TECHNOLOGY' ? '#F2E3FC' : 'transparent',
-                                  borderRadius: details.name === 'TECHNOLOGY' ? 2 : 0,
-                                  color: details.name === 'TECHNOLOGY' ? '#8251A8' : 'inherit',
-                                  fontWeight: details.name === 'TECHNOLOGY' ? 600 : 'normal',
+                                  backgroundColor: details.name === 'DESIGN' ? '#F2E3FC' : 'transparent',
+                                  borderRadius: details.name === 'DESIGN' ? 2 : 0,
+                                  color: details.name === 'DESIGN' ? '#8251A8' : 'inherit',
+                                  fontWeight: details.name === 'DESIGN' ? 600 : 'normal',
                                   px: 0.5 ,
                                   py: 0.5,
                                   fontSize: '13px'
@@ -572,7 +673,7 @@ const Events = () => {
                             </Box>
                         ))}
 
-                        {eventStatistics.map((statistics, index) =>(
+                        {designStatistics.map((statistics, index) =>(
                             <Box key={index}
                             sx={{
                                 display: 'flex',
@@ -590,7 +691,7 @@ const Events = () => {
                         </Box>
 
                         <Box display="flex" alignItems="center" flexWrap="wrap"  >
-                            <Typography sx={{px: 1, py: 4}}>Join us for the biggest techonolgy conference of the year featuring keynotes from industry leaders, hands-on experience and networking opportunities</Typography>
+                            <Typography sx={{px: 1, py: 4}}>Connect with fellow designers, share ideas, and explore the latest design trends in this interactive meetup session.</Typography>
                         </Box>
                              
                         <Box sx={{ 
@@ -613,7 +714,7 @@ const Events = () => {
                                         height: 40,
                                         fontSize: '0.875rem',
                                         fontWeight: 400,
-                                    }} >+228</Avatar>
+                                    }} >+153</Avatar>
                             </Stack>
                             <Button variant="outlined" sx={buttonStyles} >View all</Button>
                         </Box>
@@ -654,8 +755,8 @@ const Events = () => {
                             borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
                            }}>
                             <Box display="flex" alignItems="center" gap={2} flexWrap="wrap">
-                            <Typography variant="h6" fontWeight={600}>Tech Conference 2024</Typography>
-                            <Button sx={{fontWeight: 600, borderRadius: 3, backgroundColor:'#DEECFC', color:'##1141C2' }}>UPCOMING</Button>
+                            <Typography variant="h6" fontWeight={600}>Business Summit 2024</Typography>
+                            <Button sx={{fontWeight: 600, borderRadius: 3, backgroundColor:'#DEECFC', color:'##1141C2' }}>COMPLETED</Button>
                             </Box>
                             <Box display="flex" alignItems="center" gap={2} flexWrap="wrap" >
                             <Button variant="outlined" sx={buttonStyles}>{<EditNoteRoundedIcon />}</Button>
@@ -674,7 +775,7 @@ const Events = () => {
                             pl: 1,
 
                             }}>
-                          {eventDetails.map((details, index) => (
+                          {businessDetails.map((details, index) => (
                             <Box
                             key={index}
                             sx={{
@@ -686,10 +787,10 @@ const Events = () => {
                             <Typography
                               sx={{
                                   pl: 1,
-                                  backgroundColor: details.name === 'TECHNOLOGY' ? '#F2E3FC' : 'transparent',
-                                  borderRadius: details.name === 'TECHNOLOGY' ? 2 : 0,
-                                  color: details.name === 'TECHNOLOGY' ? '#8251A8' : 'inherit',
-                                  fontWeight: details.name === 'TECHNOLOGY' ? 600 : 'normal',
+                                  backgroundColor: details.name === 'BUSINESS' ? '#F2E3FC' : 'transparent',
+                                  borderRadius: details.name === 'BUSINESS' ? 2 : 0,
+                                  color: details.name === 'BUSINESS' ? '#8251A8' : 'inherit',
+                                  fontWeight: details.name === 'BUSINESS' ? 600 : 'normal',
                                   px: 0.5 ,
                                   py: 0.5,
                                   fontSize: '13px'
@@ -700,7 +801,7 @@ const Events = () => {
                             </Box>
                         ))}
 
-                        {eventStatistics.map((statistics, index) =>(
+                        {businessStatistics.map((statistics, index) =>(
                             <Box key={index}
                             sx={{
                                 display: 'flex',
@@ -718,7 +819,7 @@ const Events = () => {
                         </Box>
 
                         <Box display="flex" alignItems="center" flexWrap="wrap"  >
-                            <Typography sx={{px: 1, py: 4}}>Join us for the biggest techonolgy conference of the year featuring keynotes from industry leaders, hands-on experience and networking opportunities</Typography>
+                            <Typography sx={{px: 1, py: 4}}>A comprehensive business summit featuring keynote speakers, panel discussions, and networking opportunities for business leaders.</Typography>
                         </Box>
                              
                         <Box sx={{ 
@@ -741,7 +842,7 @@ const Events = () => {
                                         height: 40,
                                         fontSize: '0.875rem',
                                         fontWeight: 400,
-                                    }} >+228</Avatar>
+                                    }} >+309</Avatar>
                             </Stack>
                             <Button variant="outlined" sx={buttonStyles} >View all</Button>
                         </Box>
