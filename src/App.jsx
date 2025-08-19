@@ -9,6 +9,7 @@ import Dashboard from './components/Dashboard'
 import Calendar from './components/Calendar'
 import Events from './components/Events'
 import Attendees from './components/Attendees'
+import Analytics from './components/Analytics'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="Admin/Calendar" element={<Calendar />} />
           <Route path="Admin/Events" element={<Events />} />
           <Route path="Admin/Attendees" element={<Attendees />} />
+          <Route path="Admin/Analytics" element={<Analytics />} />
 
         </Routes>
       </BrowserRouter>

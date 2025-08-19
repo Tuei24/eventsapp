@@ -56,7 +56,7 @@ const DashboardCard = ({ title, value, percentage, icon, iconBg }) => (
         </Box>
 
         <Box>
-          <Typography variant="h4" fontWeight="700" sx={{ lineHeight: 1.9}}>
+          <Typography variant="h4" fontWeight="700" sx={{ lineHeight: 1.9 }}>
             {value}
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.5, pb: 1 }}>
@@ -187,19 +187,19 @@ const Dashboard = () => {
             mb: 4,
           }}
         >
-          {cardData.slice(0,4).map((card, index) => (
+          {cardData.slice(0, 4).map((card, index) => (
             <Box
               key={index}
               sx={{
-              flex: {
+                flex: {
                   xs: '100%',
                   md: 3,
-                    },
-                  minWidth: {
+                },
+                minWidth: {
                   xs: '100%',
                   md: 0,
-                            },
-                  }}>
+                },
+              }}>
               <DashboardCard
                 value={card.value}
                 title={card.title}
@@ -222,7 +222,7 @@ const Dashboard = () => {
             mb: 4,
           }}
         >
-          
+
           <Box
             sx={{
               flex: { xs: '100%', md: 8 },
@@ -309,7 +309,7 @@ const Dashboard = () => {
             </Card>
           </Box>
 
-          
+
           <Box
             sx={{
               flex: { xs: '100%', md: 4 },
@@ -390,7 +390,7 @@ const Dashboard = () => {
             mb: 4,
           }}
         >
-          
+
           <Box sx={{ flex: { xs: '100%', md: 4 }, minWidth: 0 }}>
             <Card
               sx={{
@@ -454,7 +454,7 @@ const Dashboard = () => {
             </Card>
           </Box>
 
-        
+
           <Box sx={{ flex: { xs: '100%', md: 4 }, minWidth: 0 }}>
             <Card
               sx={{
@@ -579,7 +579,7 @@ const Dashboard = () => {
             </Card>
           </Box>
 
-          
+
           <Box sx={{ flex: { xs: '100%', md: 4 }, minWidth: 0 }}>
             <Card
               sx={{
@@ -665,7 +665,6 @@ const Dashboard = () => {
         </Box>
 
 
-        {/* </Grid> */}
 
       </Box>
     </Box >
