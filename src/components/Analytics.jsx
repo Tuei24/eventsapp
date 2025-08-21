@@ -8,6 +8,8 @@ import PercentRoundedIcon from '@mui/icons-material/PercentRounded';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import FileDownloadRoundedIcon from '@mui/icons-material/FileDownloadRounded';
+import { LineChart } from '@mui/x-charts/LineChart';
+import { BarChart } from '@mui/x-charts/BarChart';
 
 const drawerWidth = 250;
 
@@ -117,10 +119,14 @@ const Analytics = () => {
     background: 'white',
     color: '#64748b',
     border: '1px solid #e2e8f0',
-    padding: '0.15rem 0.45rem',
+    padding: 0.25,
     fontSize: '0.875rem',
     cursor: 'pointer',
-  }
+  };
+
+
+
+
 
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh' }}>
@@ -200,11 +206,37 @@ const Analytics = () => {
                   <Box display="flex" alignItems="center" gap={2} flexWrap="wrap" >
                     <Typography variant="h6" fontWeight={600}>Event Registration</Typography>
                   </Box>
-                  <Box display="flex" alignItems="center" gap={1} flexWrap="wrap" sx={{ background: '#f1f5f9', px: 1, py: 0.5, borderRadius: 2 }}>
+                  <Box display="flex" alignItems="center" gap={0.5} flexWrap="wrap" sx={{ background: '#f1f5f9', px: 0.5, py: 0.5, borderRadius: 2 }}>
                     <Button variant="outlined" style={buttonStyles} sx={{ textTransform: 'none' }}>Week</Button>
                     <Button variant="outlined" style={buttonStyles} sx={{ textTransform: 'none' }}>Month</Button>
                     <Button variant="outlined" style={buttonStyles} sx={{ textTransform: 'none' }}>Year</Button>
                   </Box>
+                </Box>
+
+                <Box>
+                  <LineChart
+                    sx={{
+                      '& .MuiAreaElement-root': {
+                        fill: 'rgb(59, 130, 246, 0.2)',
+                      }
+                    }}
+                    xAxis={[{
+                      id: 'days',
+                      data: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
+                      scaleType: 'point'
+                    }]}
+                    series={[
+                      {
+                        id: 'registartions',
+                        data: [12, 19, 15, 25, 22, 18, 24],
+                        area: true,
+                        color: '#3b82f6',
+
+                      },
+                    ]}
+                    height={300}
+                    grid={{ horizontal: true }}
+                  />
                 </Box>
 
 
@@ -223,13 +255,70 @@ const Analytics = () => {
                 <Box
                   sx={{
                     display: 'flex',
+                    justifyContent: 'space-between',
                     alignItems: 'center',
-                    p: 3,
+                    padding: 3,
                     borderBottom: '1px solid rgba(241, 245, 249, 1)',
                   }}>
-                  <Typography variant="h6" fontWeight={600}>
-                    Revenue Trends
-                  </Typography>
+                  <Box display="flex" alignItems="center" gap={2} flexWrap="wrap">
+                    <Typography variant="h6" fontWeight={600}>
+                      Revenue Trends
+                    </Typography>
+                  </Box>
+
+                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
+                    {[
+                      { name: 'Revenue', color: '#667eea' },
+                      { name: 'Target', color: '#f093fb' },
+                    ].map((category) => (
+                      <Box
+                        key={category.name}
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 1,
+                          px: 2,
+                          py: 1,
+                          backgroundColor: '#f8fafc',
+                          borderRadius: 2,
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            width: 10,
+                            height: 10,
+                            borderRadius: 2,
+                            backgroundColor: category.color,
+                          }}
+                        />
+                        <Typography color="#64748b">{category.name}</Typography>
+                      </Box>
+                    ))}
+                  </Box>
+                </Box>
+
+
+                <Box>
+                  <BarChart
+                    xAxis={[{
+                      id: 'months',
+                      data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jul'],
+                      scaleType: 'band',
+                    }]}
+                    series={[{
+                      id: 'revenue',
+                      data: [12000, 15000, 18000, 16000, 20000, 22000],
+                      color: '#667eea',
+                    },
+                    {
+                      id: 'target',
+                      data: [15000, 16000, 17000, 18000, 19000, 20000],
+                      color: '#f093fb',
+                    }]}
+                    height={300}
+                    borderRadius={10}
+                    grid={{ horizontal: true }}
+                  />
                 </Box>
               </CardContent>
             </Card>
@@ -251,11 +340,14 @@ const Analytics = () => {
                     p: 3,
                     borderBottom: '1px solid rgba(241, 245, 249, 1)',
                   }}>
-                  <Box display="flex" alignItems="center" gap={2} flexWrap="wrap">
+                  <Box display="flex" alignItems="center" gap={1} flexWrap="wrap">
                     <Typography variant="h6" fontWeight={600}>Events by Category</Typography>
                   </Box>
-                  <Box display="flex" alignItems="center" gap={2} flexWrap="wrap">
-                    <Button>{<FileDownloadRoundedIcon />}</Button>
+                  <Box display="flex" alignItems="center" gap={0.5} flexWrap="wrap">
+                    <Button variant="outlined" sx={{
+                      border: '1px solid #e2e8f0', color: '#64748b', fontSize: '0.875rem',
+                      cursor: 'pointer', borderRadius: '0.5rem', px: '0.125rem', py: '0.125rem'
+                    }}>{<FileDownloadRoundedIcon />}</Button>
                   </Box>
 
                 </Box>
@@ -293,7 +385,7 @@ const Analytics = () => {
                     <Typography variant="h6" fontWeight={600}>Attendance Rates</Typography>
                   </Box>
                   <Box display="flex" alignItems="center" gap={2} flexWrap="wrap">
-                    <Typography variant="subtitle1" color="#16a34a" fontWeight={600}>87% Average</Typography>
+                    <Typography variant="subtitle2" color="#16a34a" fontWeight={600}>87% Average</Typography>
                   </Box>
 
                 </Box>
@@ -323,11 +415,55 @@ const Analytics = () => {
                     display: 'flex',
                     alignItems: 'flex-start',
                     flexDirection: 'column',
-                    p: 3,
+                    p: '1.5rem',
                     borderBottom: '1px solid rgba(241, 245, 249, 1)',
                   }}>
-                  <Typography variant="h6" fontWeight={600}>Top Performing Events</Typography>
-                  <Typography variant="body1" color="text.secondary">By attendance</Typography>
+                  <Typography fontWeight={600} fontSize="1.125rem" marginBottom="0.25rem">Top Performing Events</Typography>
+                  <Typography variant="body1" color="#64748b" fontSize="0.875rem">By attendance</Typography>
+                </Box>
+
+                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                  {[
+                    { name: 'Tech Conference 2024', number: 1, count: 234, percentage: '89%', color: '#f1f5f9;' },
+                    { name: 'Business Summit', number: 2, count: 312, percentage: '100%', color: '#f1f5f9' },
+                    { name: 'Design Meetup', number: 3, count: 156, percentage: '95%', color: '#f1f5f9;' },
+                    { name: 'Marketing Workshop', number: 4, count: 89, percentage: '74%', color: '#f1f5f9' },
+                  ].map((category) => (
+                    <Box
+                      key={category.name}
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        justifyContent: 'space-between',
+                        flexDirection: 'column',
+                        p: 2,
+                        px: 3,
+                        borderBottom: '1px solid rgba(241, 245, 249, 1)',
+                      }}
+                    >
+                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+
+                        <Box
+                          sx={{
+                            width: 32,
+                            height: 32,
+                            borderRadius: '50%',
+                            backgroundColor: category.color,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontWeight: 600,
+                            color: '#64748b',
+                            mr: 2,
+                          }}
+                        >{category.number}</Box>
+                        <Typography fontWeight={600} fontSize="0.975rem">{category.name}</Typography>
+                      </Box>
+                      <Typography variant="body2" color="#64748b" pl={6} pt={0.85} fontSize="0.85rem">
+                        {category.count} events.{category.percentage} capacity
+                      </Typography>
+                    </Box>
+                  ))}
                 </Box>
 
               </CardContent>
@@ -347,11 +483,42 @@ const Analytics = () => {
                     display: 'flex',
                     alignItems: 'flex-start',
                     flexDirection: 'column',
-                    p: 3,
+                    padding: '1.25rem',
                     borderBottom: '1px solid rgba(241, 245, 249, 1)',
                   }}>
-                  <Typography variant="h6" fontWeight={600}>Geographic Distribution</Typography>
-                  <Typography variant="body1" color="text.secondary">Attendees by location</Typography>
+                  <Typography fontSize="1.125rem" marginBottom="0.25rem" fontWeight={600}>Geographic Distribution</Typography>
+                  <Typography variant="body1" color="#64748b" fontSize="0.875rem">Attendees by location</Typography>
+                </Box>
+
+                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                  {[
+                    { location: 'San Fransisco, CA', count: 3, },
+                    { location: 'New York, NY', count: 2, },
+                    { location: 'Los Angeles, CA', count: 2, },
+                    { location: 'Chicago, IL', count: 1, },
+                  ].map((category) => (
+                    <Box
+                      key={category.name}
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        justifyContent: 'space-between',
+                        flexDirection: 'column',
+                        p: 2,
+                        px: 3,
+                        borderBottom: '1px solid rgba(241, 245, 249, 1)',
+                      }}
+                    >
+                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+
+
+                        <Typography fontWeight={600} fontSize="0.975rem">{category.location}</Typography>
+                      </Box>
+                      <Typography variant="body2" color="#64748b" pt={0.85} fontSize="0.85rem">
+                        {category.count} events
+                      </Typography>
+                    </Box>
+                  ))}
                 </Box>
               </CardContent>
             </Card>
