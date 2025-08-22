@@ -10,6 +10,11 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import FileDownloadRoundedIcon from '@mui/icons-material/FileDownloadRounded';
 import { LineChart } from '@mui/x-charts/LineChart';
 import { BarChart } from '@mui/x-charts/BarChart';
+import { PieChart } from '@mui/x-charts/PieChart';
+import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
+import LightbulbRoundedIcon from '@mui/icons-material/LightbulbRounded';
+import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded';
+
 
 const drawerWidth = 250;
 
@@ -124,8 +129,19 @@ const Analytics = () => {
     cursor: 'pointer',
   };
 
+  const data = [
+    { label: 'Technology', value: '50', color: '#667eea' },
+    { label: 'Business', value: '25', color: '#f093fb' },
+    { label: 'Design', value: '15', color: '#4facfe' },
+    { label: 'Marketing', value: '10', color: '#43e97b' },
+  ];
 
-
+  const settings = {
+    margin: { right: 5 },
+    width: 200,
+    height: 200,
+    hideLegend: true,
+  };
 
 
   return (
@@ -204,7 +220,7 @@ const Analytics = () => {
                     borderBottom: '1px solid rgba(241, 245, 249, 1)',
                   }}>
                   <Box display="flex" alignItems="center" gap={2} flexWrap="wrap" >
-                    <Typography variant="h6" fontWeight={600}>Event Registration</Typography>
+                    <Typography variant="h6" fontWeight={600}>Event Registrations</Typography>
                   </Box>
                   <Box display="flex" alignItems="center" gap={0.5} flexWrap="wrap" sx={{ background: '#f1f5f9', px: 0.5, py: 0.5, borderRadius: 2 }}>
                     <Button variant="outlined" style={buttonStyles} sx={{ textTransform: 'none' }}>Week</Button>
@@ -227,7 +243,7 @@ const Analytics = () => {
                     }]}
                     series={[
                       {
-                        id: 'registartions',
+                        id: 'registrations',
                         data: [12, 19, 15, 25, 22, 18, 24],
                         area: true,
                         color: '#3b82f6',
@@ -279,7 +295,6 @@ const Analytics = () => {
                           gap: 1,
                           px: 2,
                           py: 1,
-                          backgroundColor: '#f8fafc',
                           borderRadius: 2,
                         }}
                       >
@@ -349,8 +364,57 @@ const Analytics = () => {
                       cursor: 'pointer', borderRadius: '0.5rem', px: '0.125rem', py: '0.125rem'
                     }}>{<FileDownloadRoundedIcon />}</Button>
                   </Box>
-
                 </Box>
+
+                <Box sx={{ borderBottom: '1px solid rgba(241, 245, 249, 1)', pb: 3, pt: 3 }}>
+                  <PieChart
+                    series={[{ innerRadius: 70, outerRadius: 100, data }]}
+                    {...settings}
+                  />
+                </Box>
+
+
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, }}>
+                  {[
+                    { name: 'Technology', color: '#667eea', percentage: '50%' },
+                    { name: 'Business', color: '#f093fb', percentage: '25%' },
+                    { name: 'Design', color: '#4facfe', percentage: '15%' },
+                    { name: 'Marketing', color: '#43e97b', percentage: '10%' },
+                  ].map((category) => (
+                    <Box
+                      key={category.name}
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        gap: 1,
+                        px: 2,
+                        py: 1,
+                        borderRadius: 2,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: 10,
+                          height: 10,
+                          borderRadius: 2,
+                          backgroundColor: category.color,
+                          display: 'flex',
+                          alignItems: 'center',
+                          mt: 2
+                        }}
+                      >
+                        <Box display="flex" alignItems="center" gap={0.5} flexWrap="wrap">
+                          <Typography color="#1e293b" pl={2}>{category.name}</Typography>
+                        </Box>
+                      </Box>
+                      <Box display="flex" alignItems="center" gap={1} flexWrap="wrap" ></Box>
+                      <Typography color="#64748b" fontWeight={600}>{category.percentage}</Typography>
+                    </Box>
+                  ))}
+                </Box>
+
+
               </CardContent>
             </Card>
           </Box>
@@ -387,7 +451,43 @@ const Analytics = () => {
                   <Box display="flex" alignItems="center" gap={2} flexWrap="wrap">
                     <Typography variant="subtitle2" color="#16a34a" fontWeight={600}>87% Average</Typography>
                   </Box>
+                </Box>
 
+                <Box>
+                  <LineChart
+
+                    xAxis={[{
+                      id: 'weeks',
+                      data: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                      scaleType: 'point'
+                    }]}
+                    yAxis={[{
+                      min: 70,
+                      max: 100,
+                      valueFormatter: (value) => `${value}%`
+                    }]}
+
+                    series={[
+                      {
+                        id: 'attendance',
+                        data: [85, 92, 88, 87],
+                        area: true,
+                        color: '#16a34a',
+
+                      },
+                    ]}
+                    height={300}
+                    grid={{ horizontal: true }}
+                    sx={{
+                      '& .MuiAreaElement-root': {
+                        fill: '#16a34a',
+                        fillOpacity: 0.15,
+                      },
+                      '& .MuiLineElement-root': {
+                        strokeWidth: 2,
+                      }
+                    }}
+                  />
                 </Box>
               </CardContent>
             </Card>
@@ -523,6 +623,133 @@ const Analytics = () => {
               </CardContent>
             </Card>
           </Box>
+        </Box>
+
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: 3,
+          width: '100%',
+          mb: 3,
+        }}>
+          <Box>
+            <Typography fontSize="1.25rem" fontWeight={600} pl={2} >Key Insights</Typography>
+          </Box>
+          <Box>
+            <Button sx={{
+              background: 'linear-gradient(135deg, #667eea, #764ba2)',
+              color: 'white',
+              border: 'none',
+              padding: '0.35rem 0.8rem',
+              borderRadius: '0.5rem',
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              textTransform: 'none',
+              fontSize: '0.875rem'
+            }}>{<DescriptionRoundedIcon sx={{ fontSize: '0.975rem' }} />}Generate Report</Button>
+          </Box>
+
+        </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 3,
+            width: '100%',
+            mb: 4,
+          }}>
+          <Box sx={{ flex: { xs: '100%', md: 4 }, minWidth: 0 }}>
+            <Card
+              sx={{
+                borderRadius: 4,
+                boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+                height: '100%',
+                borderLeft: '4px solid',
+                borderLeftColor: '#16a34a'
+              }}>
+              <CardContent>
+                <Box sx={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '0.5rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontSize: '1.125rem',
+                  marginBottom: '1rem',
+                  background: '#dcfce7',
+                  color: '#16a34a'
+
+                }} />
+                <Typography fontSize="1.125rem" marginBottom="0.5rem" fontWeight={600}>Registration Growth</Typography>
+                <Typography color="#64748b" lineHeight={1.6} fontSize="0.875rem" >Events registrations have increased by 15% compared to last month, with Technology events showing the hightest growth.</Typography>
+              </CardContent>
+            </Card>
+          </Box>
+
+          <Box sx={{ flex: { xs: '100%', md: 4 }, minWidth: 0 }}>
+            <Card
+              sx={{
+                borderRadius: 4,
+                boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+                height: '100%',
+                borderLeft: '4px solid',
+                borderLeftColor: '#f59e0b'
+              }}>
+              <CardContent>
+                <Box sx={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '0.5rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '1.125rem',
+                  marginBottom: '1rem',
+                  background: '#fef3c7',
+                  color: '#f59e0b'
+
+                }}>{<WarningRoundedIcon />}</Box>
+                <Typography fontSize="1.125rem" marginBottom="0.5rem" fontWeight={600}>Attendance Rate Decline</Typography>
+                <Typography color="#64748b" lineHeight={1.6} fontSize="0.875rem" >Overall attendance rate has dropped by 3%. Consider sending more reminder emails and improving event descriptions.</Typography>
+
+              </CardContent>
+            </Card>
+          </Box>
+
+          <Box sx={{ flex: { xs: '100%', md: 4 }, minWidth: 0 }}>
+            <Card
+              sx={{
+                borderRadius: 4,
+                boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+                height: '100%',
+                borderLeft: '4px solid',
+                borderLeftColor: '#3b82f6'
+              }}>
+              <CardContent>
+                <Box sx={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '0.5rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '1.125rem',
+                  marginBottom: '1rem',
+                  background: '#dbeafe',
+                  color: '#3b82f6',
+
+                }}> {<LightbulbRoundedIcon />}</Box>
+                <Typography fontSize="1.125rem" marginBottom="0.5rem" fontWeight={600}>Peak Registration Time</Typography>
+                <Typography color="#64748b" lineHeight={1.6} fontSize="0.875rem" >Most registrations occur between 2-4 PM on weekdays. Schedule marketing campaigns during these hours for better results.</Typography>
+              </CardContent>
+            </Card>
+          </Box>
+
         </Box>
 
       </Box>
