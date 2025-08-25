@@ -14,7 +14,7 @@ import { PieChart } from '@mui/x-charts/PieChart';
 import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
 import LightbulbRoundedIcon from '@mui/icons-material/LightbulbRounded';
 import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded';
-
+import LinearProgress from '@mui/material/LinearProgress';
 
 const drawerWidth = 250;
 

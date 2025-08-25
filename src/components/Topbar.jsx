@@ -1,10 +1,27 @@
 
 import React from 'react';
-import { AppBar, Toolbar, Typography, Box, InputBase, IconButton, Badge, Avatar } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { AppBar, Tooltip, Toolbar, Typography, Box, InputBase, IconButton, Badge, Avatar } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 
 const Topbar = ({ selectedMenu, drawerWidth }) => {
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setUserName(parsedUser.name || 'User');
+      } catch (err) {
+        console.error('Error parsing user from localStorage', err);
+        setUserName('User');
+      }
+    } else {
+      setUserName('User');
+    }
+  }, []);
   return (
     <AppBar
       position="fixed"
@@ -22,19 +39,19 @@ const Topbar = ({ selectedMenu, drawerWidth }) => {
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            backgroundColor: '#f8fafc',
-            borderRadius: 2,
-            px: 1,
-            width: 300,
-          }}
-        >
-          <SearchIcon sx={{ mr: 1 }} />
-          <InputBase placeholder="Search events…" fullWidth />
-        </Box>
-        
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              backgroundColor: '#f8fafc',
+              borderRadius: 2,
+              px: 1,
+              width: 300,
+            }}
+          >
+            <SearchIcon sx={{ mr: 1 }} />
+            <InputBase placeholder="Search events…" fullWidth />
+          </Box>
+
           <IconButton size="large" aria-label="show 3 new notifications" color="inherit">
             <Badge badgeContent={3} color="error">
               <NotificationsIcon />
@@ -42,8 +59,10 @@ const Topbar = ({ selectedMenu, drawerWidth }) => {
           </IconButton>
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <Avatar alt="Jane Doe" src="" />
-            <Typography variant="body1">Jane Doe</Typography>
+            <Tooltip title={userName}>
+              <Avatar alt={userName} />
+            </Tooltip>
+            <Typography variant="body1">{userName}</Typography>
           </Box>
         </Box>
       </Toolbar>

@@ -9,6 +9,7 @@ import Topbar from './Topbar';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+import AddEventForm from './AddEventForm';
 
 const drawerWidth = 250;
 
@@ -32,6 +33,7 @@ const Calendar = () => {
   const [selectedMenu, setSelectedMenu] = useState('Calender');
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [openForm, setOpenForm] = useState(false);
 
   const handlePrevMonth = () => {
     setCurrentMonth(prev => (prev === 0 ? 11 : prev - 1));
@@ -121,7 +123,7 @@ const Calendar = () => {
                     <Button variant="outlined" sx={buttonStyles}>Month</Button>
                     <Button variant="outlined" sx={buttonStyles}>Week</Button>
                     <Button variant="outlined" sx={buttonStyles}>Day</Button>
-                    <Button variant="contained" startIcon={<AddIcon />} sx={buttonContainedStyles}>Add Event</Button>
+                    <Button variant="contained" startIcon={<AddIcon />} sx={buttonContainedStyles} onClick={() => setOpenForm(true)}>Add Event</Button>
                   </Box>
                 </Box>
               </CardContent>
@@ -238,6 +240,8 @@ const Calendar = () => {
           </Box>
         </Box>
       </Box>
+
+      <AddEventForm open={openForm} onClose={() => setOpenForm(false)} />
     </Box>
   );
 };

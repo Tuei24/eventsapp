@@ -85,6 +85,7 @@ const DashboardCard = ({ title, value, percentage, icon, iconBg }) => (
 const Dashboard = () => {
   const [selectedMenu, setSelectedMenu] = useState('Dashboard');
 
+
   const cardData = [
     {
       title: 'Total Events',

@@ -22,11 +22,11 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Posts" element={<Posts />} />
-          <Route path="Admin/Dashboard" element={<Dashboard />} />
-          <Route path="Admin/Calendar" element={<Calendar />} />
-          <Route path="Admin/Events" element={<Events />} />
-          <Route path="Admin/Attendees" element={<Attendees />} />
-          <Route path="Admin/Analytics" element={<Analytics />} />
+          <Route path="/Admin/Dashboard" element={<Dashboard />} />
+          <Route path="/Admin/Calendar" element={<Calendar />} />
+          <Route path="/Admin/Events" element={<Events />} />
+          <Route path="/Admin/Attendees" element={<Attendees />} />
+          <Route path="/Admin/Analytics" element={<Analytics />} />
 
         </Routes>
       </BrowserRouter>

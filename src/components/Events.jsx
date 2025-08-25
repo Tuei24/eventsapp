@@ -11,6 +11,7 @@ import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
 import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
+import CreateNewEventForm from './CreateNewEventForm';
 
 const drawerWidth = 250;
 
@@ -44,6 +45,7 @@ const Events = () => {
     const [status, setStatus] = useState('All Status');
     const [category, setCategory] = useState('All Categories');
     const [sort, setSort] = useState('Sort by Date');
+    const [openForm, setOpenForm] = useState(false);
 
     const cardData = [
         {
@@ -308,7 +310,7 @@ const Events = () => {
 
                                     <Box display="flex" alignItems="center" gap={2} flexWrap="wrap">
                                         <Button variant="outlined" startIcon={<FileDownloadRoundedIcon />} sx={buttonStyles}>Export</Button>
-                                        <Button variant="contained" startIcon={<AddIcon />} sx={buttonContainedStyles}>Create Event</Button>
+                                        <Button variant="contained" startIcon={<AddIcon />} sx={buttonContainedStyles} onClick={() => setOpenForm(true)}>Create Event</Button>
                                     </Box>
                                 </Box>
                             </CardContent>
@@ -857,6 +859,7 @@ const Events = () => {
 
 
             </Box>
+            <CreateNewEventForm open={openForm} onClose={() => setOpenForm(false)} />
         </Box>
     );
 };

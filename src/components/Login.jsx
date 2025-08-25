@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import '../App.css'
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -7,6 +8,7 @@ function Login() {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
   const validateForm = () => {
     let isValid = true;
@@ -39,8 +41,18 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    validateForm();
+    if (!validateForm()) return;
 
+    const fakeUser = {
+      name: email === 'admin@example.com' ? 'Admin User' : 'Jane Doe',
+      email,
+      token: '12345abcde'
+    };
+
+    localStorage.setItem('user', JSON.stringify(fakeUser));
+    setSuccessMessage('Login successful!');
+
+    navigate('/Admin/Dashboard');
   };
 
   console.log('Email:', email);
