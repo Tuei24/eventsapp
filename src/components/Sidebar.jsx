@@ -44,8 +44,9 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, drawerWidth }) => {
           boxSizing: 'border-box',
         },
       }}
-      variant="permanent"
+      variant="persistent"
       anchor="left"
+      open={open}
     >
 
 
@@ -56,6 +57,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, drawerWidth }) => {
         color: 'white',
       }}
       >
+
         <Box
           sx={{
             display: 'flex',
@@ -71,6 +73,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, drawerWidth }) => {
             EventHub
           </Typography>
         </Box>
+
 
         <List sx={{ padding: '1rem 0' }}>
           {menuItems.map((item) => (

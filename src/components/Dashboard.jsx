@@ -327,6 +327,7 @@ const Dashboard = () => {
               }}
             >
               <CardContent sx={{ width: '100%' }}>
+
                 <Box
                   sx={{
                     display: 'flex',
@@ -375,6 +376,7 @@ const Dashboard = () => {
                     </Box>
                   ))}
                 </Box>
+
               </CardContent>
             </Card>
           </Box>
