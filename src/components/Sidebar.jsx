@@ -26,7 +26,7 @@ const Sidebar = ({ selectedMenu, setSelectedMenu, drawerWidth }) => {
 
 
   const handleMenuClick = (text, link) => {
-    console.log(link, "linkkkkkk")
+    console.log(link, "linkkkkkk hereeeee")
     setSelectedMenu(text);
     navigate(link)
 
